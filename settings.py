@@ -60,12 +60,12 @@ ADMIN_MEDIA_PREFIX = '/media/'
 SECRET_KEY = 'w1oim%8yfl75mey03=m&^mmnk+$a^ddrlo%*wy^b0@10)in5#&'
 
 FRONTPAGE_DIR = local_file('content')
-TWS_FILE = '/Users/pdc/th/jeremydennis.co.uk/tws.data';
+TWS_FILE = local_file('content/tws.data');
 
 SPREADLINKS_DIR = local_file('linklibraries')
 SPREADLINKS_PER_PAGE = 20
 
-STATIC_URL = 'http://localhost/~pdc/jeremyday/'
+STATIC_URL = 'http://static.jeremyday.org.uk/'
 
 
 # List of callables that know how to import templates from various sources.

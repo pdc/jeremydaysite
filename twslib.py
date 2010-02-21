@@ -45,7 +45,7 @@ def word_iter(s):
     if beg:
         yield s[beg:]
 
-def tws_iter(in_file='/Users/pdc/th/jeremydennis.co.uk/tws.data'):
+def tws_iter(in_file):
     """Load the list of strips from tws.data."""
     input = codecs.open(in_file, 'r', 'utf-8')
     count = 0
@@ -67,14 +67,14 @@ def tws_iter(in_file='/Users/pdc/th/jeremydennis.co.uk/tws.data'):
             
             
 cached_tws = None
-def get_tws(in_file='/Users/pdc/th/jeremydennis.co.uk/tws.data'):
+def get_tws(in_file):
     global cached_tws
     if cached_tws is None:
-        cached_tws = list(tws_iter())
+        cached_tws = list(tws_iter(in_file))
         cached_tws.sort(key=lambda d: d['date'])
     return cached_tws
     
-def sites_iter(in_file='/Users/pdc/Projects/jeremydennis.co.uk/cleanskies.data'):
+def sites_iter(in_file):
     """Load the list of other web sites."""
     input = codecs.open(in_file, 'r', 'utf-8')
     count = 0
@@ -90,7 +90,7 @@ def sites_iter(in_file='/Users/pdc/Projects/jeremydennis.co.uk/cleanskies.data')
     print 'Read', count, 'entries from', in_file
     
 cached_sites = None
-def get_sites(in_file='/Users/pdc/Projects/jeremydennis.co.uk/cleanskies.data'):
+def get_sites(in_file):
     global cached_sites
     if cached_sites is None:
         cached_sites = list(sites_iter(in_file))
