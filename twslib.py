@@ -9,8 +9,6 @@ Copyright © 2008 Damian Cugley. All rights reserved.
 
 import os
 import sys
-from genshi.core import Markup
-from genshi.template.loader import TemplateLoader
 import markdown
 import getopt
 import codecs
