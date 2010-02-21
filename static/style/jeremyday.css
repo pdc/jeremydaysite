@@ -1,0 +1,529 @@
+@font-face {
+    font-family: "League Gothic";
+    src: url(League%20Gothic.otf);
+}
+
+/* A font by Jos Buivenga (exljbris) -> www.exljbris.nl */
+@font-face {
+    font-family: "Museo Sans";
+    src: url(MuseoSans_500.otf);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-size: 81.25%; /* Often this means 13px */
+    
+    font-family: "Verdana", sans-serif;
+    line-height: 1.23; /* Often this will be 16px */
+    background: #EEE url(jeremyday-bg-pale.png);
+}
+
+#top {
+    padding: 1px 0;
+    background: #CC004C url(jeremyday-bg.gif);
+}
+
+h1 {
+    font-size: 6em;
+    margin: 0.667em 10px 0;
+    
+    font-family: "Museo Sans", sans-serif;
+    color: #FFF;
+    text-shadow: #000 1px 1px 3px;
+}
+
+h1 img {
+    display: block;
+}
+
+#tabs {
+    float: left;
+    width: 100%;
+    height: 50px;
+    margin: -49px 0 0 0;
+}
+#tabs ul {
+    float: right;
+}
+
+#tabs li {
+    float: left;
+ 
+    list-style-type: none;
+    font-family: "Clarendon", "Clarendon BT", serif;
+    color: #EEE;
+    text-align: center;
+}
+
+#tabs li#tab-home {
+    background: url(jeremyday-bg-dark.png) left top fixed;
+}
+#tabs li#tab-projects {
+    color: #333;
+    background: url(wares-180.jpeg) 50% 50% no-repeat;
+}
+#tabs li#tab-whores {
+    background: url(wares-whores-180.jpeg) 50% 50% no-repeat;
+}
+#tabs li#tab-1999 {
+    color: #333;
+    background: url(link-1999.png) left bottom no-repeat;
+}
+
+
+#tabs li a,
+#tabs li b {
+    font-size: 16px;
+    display: block;
+    width: 100px;
+    height: 16px;
+    padding: 17px;
+    line-height: 1;
+    
+    color: inherit;
+    text-decoration: none;
+}
+
+
+#tabs li.active b {
+    background: #EEE url(jeremyday-bg-pale.png) left top fixed;
+    color: #333;
+}
+
+#tabs li a {
+    background: url(tab.png) left bottom no-repeat;
+}
+#tabs li#tab-home a {
+    background: transparent;
+}
+
+#tabs li a:hover,
+#tabs li a:active {
+    color: #CC004C;
+    text-decoration: underline;
+}
+
+p {
+    margin: 0.616em 10px;
+    max-width: 460px;
+}
+
+.clear {
+    clear: both;
+}
+
+#trail {
+    margin: 0;
+    width: 220px;
+    padding: 0.333em 10px;
+    background-color: #CC004C;
+    color: #FF88CC;
+}
+
+#trail a {
+    color: #FFF;
+}
+
+#content {
+    margin: 0 auto;
+    width: 960px;
+    padding: 1px 0;
+}
+
+/*
+* Front page basic layout
+*/
+    
+
+.col {
+    float: left;
+}
+
+#tws { /* 3u */
+    width: 240px;
+}
+
+#main { /* 7u */
+    width: 560px;
+}
+
+#appearances {
+    width: 160px;
+}
+
+/* Weekly Strip */
+
+#tws li {
+    font-size: 0.85em;
+    clear: both;
+    float: left;
+    width: 100%;
+    
+    list-style-type: none;
+}
+
+#tws li a {
+    display: block;
+    float: left;
+    width: 220px;
+    padding: 0.5em 10px;
+    
+    color: inherit;
+    text-decoration: none;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+#tws li a:hover {
+    z-index: 10;
+    
+    background-color: #FFF;
+    -moz-box-shadow: #000 2px 2px 5px;
+    -webkit-box-shadow: #000 2px 2px 5px;
+}
+#tws li a:active {
+    background-color: #FFF;
+    -moz-box-shadow: #000 1px 1px 3px;
+    -webkit-box-shadow: #000 1px 1px 3px;
+}
+
+#tws li a:hover b {
+    color: #CC004C;
+    text-decoration: underline;
+}
+
+#tws li img {
+    display: block;
+    float: left;
+    margin-right: 10px;
+}
+
+#tws li b,
+#tws li small {
+    display: block;
+}
+
+#tws li small {
+    font-size: 0.82em;
+}
+
+/* Main */
+
+#main a:link {
+    color: #CC004C;
+    text-decoration: none;
+    border-bottom: 1px solid #FF6699;
+}
+
+#main a:visited {
+    color: #660011;
+    text-decoration: none;
+    border-bottom: 1px solid #FF448F;
+}
+
+#main a:hover {
+    color: #CC004C;
+    background-color: #FFF;
+    border-bottom: 1px solid #CC004C;
+}
+    
+    
+
+#main p {
+    margin: 0.616em 10px 1.23em;
+    max-width: 620px;
+}
+
+.picture.captioned {
+    position: relative;
+}
+
+.picture.left {
+    float: left;
+    margin: 0 20px 0 10px;
+}
+.picture.right {
+    float: right;
+    margin: 0 10px 0 20px;
+}
+    
+.picture small {
+    font-size: 1em;
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    -moz-transform: rotate(-90deg);
+    -webkit-transform:  translate(100%, 0) translate(1em, 0) rotate(-90deg);
+    -webkit-transform-origin: left bottom;
+    
+    color: #999;
+    font-variant: small-caps;
+    letter-spacing: 0.05em;
+    text-transform: lowercase;
+}
+
+.picture a {
+    color: inherit;
+    text-decoration: none;
+}
+
+#main .picture a {
+    border: none;
+}
+
+.picture a img {
+    display: block;
+}
+
+.picture a:hover small {
+    color: #CC004C;
+    text-decoration: underline;
+}
+
+/* Livejournal has the most layered HTML you have ever seen */
+
+.asset-meta-list {
+    font-size: 85%;
+    color: #999;
+}
+.asset-meta-list li {
+    list-style-type: none;
+    margin: 0 10px;
+}
+
+.post-asset {
+    position: relative;
+    margin: 1.23em 0;
+    padding: 0 10px 0 80px;
+}
+/* Livejournal has 34 layes of divs with helpful class names
+ ... and then the text itself is naked with paragraphs separated by BR tags.
+ All we can do is indent the lot and hope for the best. */
+.asset-body {
+    margin: 0 10px;
+}
+#main .asset-body p {
+    margin: 1.23em 0;
+}
+
+.user-icon {
+    position: absolute;
+    left: 10px;
+    top: 0;
+}
+.user-icon img {
+    width: 70px;
+    height: 70px;
+}
+
+h4 {
+    font-size: 1em;
+    float: left;
+    width: 50px;
+    margin: 0.616em 0 0 -70px;
+    
+    font-weight: normal;
+    color: #999;
+}
+
+.asset-tags-list,
+.asset-meta-list {
+    width: 100%;
+    float: left;
+    margin: 0.616em 0;
+}
+
+.asset-tags-list li,
+.asset-meta-list li {
+    float: left;
+    margin: 0 10px;
+    list-style-type: none;
+}
+
+.asset-footer {
+    clear: both;
+}
+
+
+/* Twitter */
+    
+ul.links {
+    padding: 0.25em 0;
+}
+
+.links li {
+    list-style-type: none;
+}
+
+.links li img {
+    vertical-align: middle;
+}
+
+#cleanskies li {
+    font-size: 0.85em;
+    list-style-type: none;
+}
+
+#cleanskies li img {
+    display: block;
+    float: left;
+    width: 16px;
+    height: 16px;
+    margin: 0 5px 0 0;
+}
+
+.links li a,
+#cleanskies li a {
+    display: block;
+    
+    color: inherit;
+    text-decoration: none;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+.links li a {
+    padding: 0.25em 10px;
+}
+
+.links li b {
+    font-weight: normal;
+}
+
+#cleanskies li a {    
+    padding: 0.5em 10px;
+}
+
+.links li a:hover,
+#cleanskies li a:hover {
+    background-color: #FFF;
+    -moz-box-shadow: #000 2px 2px 5px;
+    -webkit-box-shadow: #000 2px 2px 5px;
+}
+
+.links li a:active,
+#cleanskies li a:active {
+    -moz-box-shadow: #000 1px 1px 3px;
+    -webkit-box-shadow: #000 1px 1px 3px;
+}
+
+.links li a:hover b,
+#cleanskies li a:hover b {
+    color: #CC004C;
+    text-decoration: underline;
+}
+
+/*
+* Projects page
+*/
+
+#keywords {
+    width: 160px;
+    float: left;
+}
+
+#keywords li {
+    margin: 0.67em 10px 0.67em 30px;
+}
+
+h2 {
+    font-size: 1.38em; /* Often this will be 18px */
+    clear: both;
+    padding: 0.89em 10px 0;
+    
+    font-family: "Museo Sans", sans-serif;
+    text-transform: lowercase;
+    font-weight: normal;
+    color: #CC004C;
+    background-color: #FE0;
+}
+
+#links {
+    width: 800px;
+    float: left;
+}
+#links ul {
+    margin: 0.67em 0;
+}
+
+#links li {
+    list-style-type: none;
+}
+
+#links a {
+    display: block;
+    min-height: 70px;
+    
+    color: inherit;
+    text-decoration: inherit;
+}
+
+#links a:hover {
+    background-color: #FFF;
+    -moz-box-shadow: #000 1px 1px 5px;
+    -webkit-box-shadow: #000 1px 1px 5px;
+}
+#links a:active {
+    background-color: #FFF;
+    -moz-box-shadow: #000 1px 1px 3px;
+    -webkit-box-shadow: #000 1px 1px 3px;
+}
+
+h3 {
+    font-size: 1.38em;
+    margin: 0 10px;
+    width: 620px;
+    
+    font-family: "Museo Sans", sans-serif;
+    font-weight: normal;
+    text-transform: lowercase;
+}
+#links h3 {
+    margin: 0 10px 0 170px;
+}
+
+a:hover h3 {
+    color: #CC004C;
+    text-decoration: underline;
+}
+
+h3 img {
+    display: block;
+    float: left;
+    margin: 10px 10px 10px -160px;
+    max-width: 140px;
+}
+
+#links li p {
+    margin: 0 10px 0.67em 170px;
+}
+
+.pagination {
+    padding: 0.333em 10px 0.333em 170px;
+    clear: both;
+    background-color: #DDD;
+}
+
+#powered-by {
+    width: 960px;
+    margin: 20px auto 0;
+    color: #FFF;
+}
+
+#powered-by p {
+    width: 220px;
+    margin: 0 0 0 720px;
+    padding: 0.33em 10px;
+    
+    text-align: center;
+    background: #444 url(jeremyday-bg-dark.png);
+}
+
+#powered-by a {
+    color: #FFF;
+}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load markup %}
+
+{% block title %}Jeremy Day{% endblock %}
+{% block heading %}<img src="{{ settings.STATIC_URL }}style/wordmark.png" alt="Jeremy Day" />{% endblock %}
+
+{% block trail %}{% endblock %}
+
+{% block tab-home %}<li id="tab-home" class="active"><b>Home</b></li>{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="{{ settings.STATIC_URL }}js/front.js"></script>
+<script type="text/javascript" src="http://search.twitter.com/search.json?q=from%3Acleanskies&amp;callback=twitter"></script>
+{% endblock %}
+
+{% block content %}
+
+<div id="tws" class="col">
+  <h2>The Weekly Strip</h2>
+  <ul>
+    {% for strip in tws %}
+    <li>
+      <a href="http://www.jeremydennis.co.uk/{{ strip.page_href }}">
+        <img src="http://www.jeremydennis.co.uk/{{ strip.icon_src }}" alt="" width="80" height="80" />
+        <b>{{ strip.number }}. {{ strip.title }}</b>
+        <small>{{ strip.date|date:"d F Y" }}</small>
+      </a>
+    {% endfor %}
+  </ul>  
+</div>
+
+<div id="main" class="col">
+  <div class="picture captioned left">
+    <a href="http://www.flickr.com/photos/glasseye/2318407904/">
+      <img src="{{ settings.STATIC_URL }}style/by-matt-220w.jpg" alt="" width="220" height="330" />
+      <small>Photo by Matt Brooker</small>
+    </a>
+  </div>
+  {{ text|markdown }}
+  
+  <h2>LiveJournal LiveJournal</h2>
+  <div id="livejournal"><a href="http://cleanskies.livejournal.com/">Click to see my LiveJournal</a></div>
+</div>
+
+<div id="appearances" class="col">
+  <h2>Cleanskies on …</h2>
+  <ul class="links">
+    {% for site in other_sites %}
+    <li>
+      <a href="{{ site.href }}">
+        <img src="{{ site.icon_src }}" alt="" />
+        <b>{{ site.title }}</b>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+  
+  <h2>tweet tweet</h2>
+  <ul id="cleanskies">
+  </ul>
+</div>
+{% endblock %}
