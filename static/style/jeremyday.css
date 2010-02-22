@@ -14,6 +14,10 @@
     padding: 0;
 }
 
+img {
+    border: none;
+}
+
 body {
     font-size: 81.25%; /* Often this means 13px */
     
@@ -257,10 +261,11 @@ p {
     position: absolute;
     right: 0;
     bottom: 0;
-    -moz-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg) translate(100%, 0) translate(0,1em);
+    -moz-transform-origin: right bottom;
     -webkit-transform:  translate(100%, 0) translate(1em, 0) rotate(-90deg);
     -webkit-transform-origin: left bottom;
-    
+
     color: #999;
     font-variant: small-caps;
     letter-spacing: 0.05em;
