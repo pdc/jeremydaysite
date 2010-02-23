@@ -1,5 +1,7 @@
 /* Jazz up the index page smidgen */
 
+    // We are loading the Twitter feed, so mark the heading accordingly.
+    $('#cleanskies').prev('h2').addClass('loading');
 
 /**
 * Process a bunch of Twitter tweets.
@@ -9,6 +11,7 @@
 function twitter(data) {
    $(document).ready(function () {
     var list = $('#cleanskies');
+    $(list).prev('h2').removeClass('loading');
     for (var i = 0; i < data.results.length; ++i) {
         var tweet = data.results[i];
         var link = $('<a>').attr('href', 'http://twitter.com/cleanskies/statuses/' + tweet.id);

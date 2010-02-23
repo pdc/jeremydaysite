@@ -440,7 +440,13 @@ h2 {
     text-transform: lowercase;
     font-weight: normal;
     color: #CC004C;
-    background-color: #FE0;
+    background-color: #FC3;
+}
+
+h2.loading {
+    background-image: url(ajax-loader.gif);
+    background-position: right bottom;
+    background-repeat: no-repeat;
 }
 
 #links {
