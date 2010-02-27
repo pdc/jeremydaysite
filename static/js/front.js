@@ -1,7 +1,7 @@
 /* Jazz up the index page smidgen */
 
-    // We are loading the Twitter feed, so mark the heading accordingly.
-    $('#cleanskies').prev('h2').addClass('loading');
+// We are loading the Twitter feed, so mark the heading accordingly.
+$('#cleanskies').prev('h2').addClass('loading');
 
 /**
 * Process a bunch of Twitter tweets.
@@ -57,12 +57,16 @@ function twitter(data) {
 }
 
 $(document).ready(function () {
+    $('#livejournal')
+        .prev('h2').addClass('loading');
     $.ajax({
         url: 'livejournal',
         dataType: 'json',
         success: function (data, textStatus, request) {
             if (data.success) {
-                $('#livejournal').html(data.body);
+                $('#livejournal')
+                    .html(data.body)
+                    .prev('h2').removeClass('loading');
             }
         }
     });
