@@ -19,7 +19,7 @@ function twitterTo(data, list) {
         // so I could just use jQueryâ€™s html method here,
         // but do I want to trust Twitter to be immune to XSS attacks?
         // Instead I reverse the HTML escaping jQueryâ€™s text method will apply.
-        text = tweet.text.replace('&lt', '<').replace(/&amp;/, '&');
+        text = tweet.text.replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&amp;/g, '&');
         $('<span>').text(text).appendTo(link);
         link.append(' ');
     
