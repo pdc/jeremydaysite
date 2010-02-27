@@ -443,6 +443,7 @@ h2 {
     
     font-family: "Museo Sans", sans-serif;
     text-transform: lowercase;
+    line-height: 1.333;
     font-weight: normal;
     color: #CC004C;
     background-color: #FC3;
@@ -450,7 +451,7 @@ h2 {
 
 h2.loading {
     background-image: url(ajax-loader.gif);
-    background-position: right bottom;
+    background-position: right 18px;
     background-repeat: no-repeat;
 }
 
