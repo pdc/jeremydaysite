@@ -1,6 +1,6 @@
 @font-face {
-    font-family: "League Gothic";
-    src: url(League%20Gothic.otf);
+    font-family: "Chunk Five";
+    src: url(Chunkfive.otf);
 }
 
 /* A font by Jos Buivenga (exljbris) -> www.exljbris.nl */
@@ -55,10 +55,11 @@ h1 img {
 }
 
 #tabs li {
+    font-size: 3em;
     float: left;
  
     list-style-type: none;
-    font-family: "Clarendon", "Clarendon BT", serif;
+    font-family: "Chunk Five", "Clarendon", "Clarendon BT", serif;
     color: #EEE;
     text-align: center;
 }
