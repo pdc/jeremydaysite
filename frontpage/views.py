@@ -27,11 +27,11 @@ def render_with_template(default_template_name, default_base_template_name='base
         return wrapped_handler
     return decorator
 
-@render_with_template('frontpage/front.html')
+@render_with_template('jeremyday/front.html')
 def front_page(request):
     text_file = os.path.join(settings.FRONTPAGE_DIR,'introduction.md')
     text = codecs.open(text_file, 'r', 'UTF-8').read()
-    tws = twslib.get_tws(settings.TWS_FILE)
+    tws = twslib.get_tws(settings.TWS_FILE, settings.TWS_SRC_PREFIX)
     
     other_sites = twslib.get_sites(os.path.join(settings.FRONTPAGE_DIR, 'other-sites.data'))
     return {

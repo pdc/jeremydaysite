@@ -7,7 +7,7 @@ from django.conf import settings
 
 spreadlinks_args = {
     'root_dir': settings.SPREADLINKS_DIR, 
-    'template_name': 'projects/list.html'
+    'template_name': 'jeremyday/projects_list.html',
 }
 
 urlpatterns = patterns('spreadsite.spreadlinks.views',
@@ -18,6 +18,8 @@ urlpatterns = patterns('spreadsite.spreadlinks.views',
 ) + patterns('jeremyday.frontpage.views',
     (r'^$', 'front_page', {}, 'front_page'),
     (r'^livejournal$', 'livejournal', {}, 'livejournal'),
+) + patterns('',
+    (r'^tws/', include('jeremyday.theweeklystrip.urls')),
     # Example:
     # (r'^jeremyday/', include('jeremyday.foo.urls')),
     

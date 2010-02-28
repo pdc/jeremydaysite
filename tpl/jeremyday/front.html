@@ -17,11 +17,12 @@
 
 <div id="tws" class="col">
   <h2>The Weekly Strip</h2>
+  <p><a href="{% url tws_latest %}">Archive</a></p>
   <ul>
     {% for strip in tws %}
     <li>
-      <a href="http://www.jeremydennis.co.uk/{{ strip.page_href }}">
-        <img src="http://www.jeremydennis.co.uk/{{ strip.icon_src }}" alt="" width="80" height="80" />
+      <a href="{% url tws_strip number=strip.number|stringformat:"d" %}">
+        <img src="{{ strip.icon_src }}" alt="" width="80" height="80" />
         <b>{{ strip.number }}. {{ strip.title }}</b>
         <small>{{ strip.date|date:"d F Y" }}</small>
       </a>

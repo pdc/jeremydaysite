@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load markup %}
+
+{% block title %}{{ strip.title }} - The Weekly Strip - Jeremy Day{% endblock %}
+{% block heading %}<img src="{{ settings.STATIC_URL }}style/theweeklystrip.png" alt="The Weekly Strip by Jeremy Day" />{% endblock %}
+
+
+{% block javascript %}
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script src="{{ settings.STATIC_URL }}js/strip.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+
+<div id="strip">
+  <h2><small>{{ strip.number }}.</small> {{ strip.title }}</h2>
+  <p>
+    {{ strip.date|date:"j N Y" }}
+    {% if strip.lj %}
+      /
+      <a href="http://cleanskies.livejournal.com/{{ strip.lj }}.html">Comments</a>
+    {% endif %}
+  </p>
+  <div>
+    <img src="{{ strip.image_src }}" alt="" />
+  </div>
+</div>
+
+<div id="strip-nav">
+  <div id="strip-prev-next">
+    <h2>More</h2>
+    <div>
+      {% if prev %}
+      <a href="{% url tws_strip number=prev.number|stringformat:"d" %}"
+          title="{{ prev.number }}. {{ prev.title }} {{ prev.date|date:"j N Y" }}"
+          class="prev">
+        <img src="{{ prev.icon_src }}" alt="prev" />
+        <span>PREV</span>
+      </a>
+      {% endif %}
+      {% if next %}
+      <a href="{% url tws_strip number=next.number|stringformat:"d" %}"
+          title="{{ next.number }}. {{ next.title }} {{ next.date|date:"j N Y" }}"
+          class="next">
+        <img src="{{ next.icon_src }}" alt="next" />
+        <span>NEXT</span>
+      </a>
+      {% endif %}
+      <div class="clear">&nbsp;</div>
+    </div>
+  </div>
+  
+  <h2>Jump</h2>
+  <ul id="strip-jumps">
+    {% for label, other_strip, is_link in jumps %}
+    <li>
+      {% if is_link %}
+      <a href="{% url tws_strip number=other_strip.number|stringformat:"d" %}"
+          title="{{ other_strip.number }}. {{ other_strip.title }} {{ other_strip.date|date:"j N Y" }}">
+        <img src="{{ other_strip.icon_src }}" alt="{{ other_strip.number }}" />
+        <b>{{ label }}</b>
+      </a>
+      {% else %}
+      <span title="{{ other_strip.number }}. {{ other_strip.title }} {{ other_strip.date|date:"j N Y" }}">
+        <img src="{{ other_strip.icon_src }}" alt="{{ other_strip.number }}" />
+        <b>{{ label }}</b>
+      </span>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% endblock %}

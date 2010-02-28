@@ -13,6 +13,7 @@ import markdown
 import getopt
 import codecs
 import datetime
+from django.core.cache import cache
 
 
 def word_iter(s):
@@ -45,7 +46,7 @@ def word_iter(s):
     if beg:
         yield s[beg:]
 
-def tws_iter(in_file):
+def tws_iter(in_file, prefix):
     """Load the list of strips from tws.data."""
     input = codecs.open(in_file, 'r', 'utf-8')
     count = 0
@@ -60,19 +61,19 @@ def tws_iter(in_file):
             date = datetime.date(int(s[:4]), int(s[4:6], 10), int(s[6:8], 10))
             d['date'] = date
             d['number'] = count
-            d['image_src'] = '%s/%s' % (s[:4], d['image_src'])
-            d['icon_src'] = '%s/%s' % (s[:4], d['icon_src'])
+            d['image_src'] = '%s%s/%s' % (prefix, s[:4], d['image_src'])
+            d['icon_src'] = '%s%s/%s' % (prefix, s[:4], d['icon_src'])
             yield d
     print 'Read', count, 'entries from', in_file
-            
-            
-cached_tws = None
-def get_tws(in_file):
-    global cached_tws
-    if cached_tws is None:
-        cached_tws = list(tws_iter(in_file))
-        cached_tws.sort(key=lambda d: d['date'])
-    return cached_tws
+
+TWS_CACHE_KEY = 'tws-data'
+def get_tws(in_file, prefix):
+    result = cache.get(TWS_CACHE_KEY)
+    if result is None:
+        result = list(tws_iter(in_file, prefix))
+        result.sort(key=lambda d: d['date'])
+        cache.set(TWS_CACHE_KEY, result)
+    return result
     
 def sites_iter(in_file):
     """Load the list of other web sites."""
