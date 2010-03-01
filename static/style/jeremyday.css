@@ -26,6 +26,12 @@ body {
     background: #EEE url(jeremyday-bg-pale.png);
 }
 
+#home-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 #top {
     padding: 1px 0;
     background: #CC004C url(jeremyday-bg.gif);
@@ -35,7 +41,7 @@ h1 {
     font-size: 6em;
     margin: 0.667em 10px 0;
     
-    font-family: "Museo Sans", sans-serif;
+    font-family: "Chunk Five", "Clarendon BT", "Clarendon", sans-serif;
     color: #FFF;
     text-shadow: #000 1px 1px 3px;
 }
@@ -161,16 +167,24 @@ p {
 
 /* Weekly Strip */
 
-#tws li {
+#tws li,
+.tws-year li {
     font-size: 0.85em;
-    clear: both;
     float: left;
-    width: 100%;
     
     list-style-type: none;
 }
 
-#tws li a {
+#tws li {
+    clear: both;
+    width: 100%;
+}
+.tws-year li {
+    width: 240px;
+}
+
+#tws li a,
+.tws-year li a {
     display: block;
     float: left;
     width: 220px;
@@ -182,36 +196,43 @@ p {
     -webkit-border-radius: 4px;
 }
 
-#tws li a:hover {
+#tws li a:hover,
+.tws-year li a:hover {
     z-index: 10;
     
     background-color: #FFF;
     -moz-box-shadow: #000 2px 2px 5px;
     -webkit-box-shadow: #000 2px 2px 5px;
 }
-#tws li a:active {
+#tws li a:active ,
+.tws-year li a:active {
     background-color: #FFF;
     -moz-box-shadow: #000 1px 1px 3px;
     -webkit-box-shadow: #000 1px 1px 3px;
 }
 
-#tws li a:hover b {
+#tws li a:hover b,
+.tws-year li a:hover b {
     color: #CC004C;
     text-decoration: underline;
 }
 
-#tws li img {
+#tws li img,
+.tws-year li img {
     display: block;
     float: left;
     margin-right: 10px;
 }
 
 #tws li b,
-#tws li small {
+#tws li small,
+.tws-year li b,
+.tws-year li small {
     display: block;
 }
 
-#tws li small {
+#tws li small,
+.tws-year li small {
     font-size: 0.82em;
 }
 
@@ -673,4 +694,16 @@ h3 img {
 #strip-jumps a:hover b {
     text-decoration: underline;
     color: #CC004C;
+}
+
+.tws-month {
+    float: left;
+    width: 240px;
+}
+
+#tws-2003-august,
+#tws-2004-june,
+#tws-2004-october, 
+#tws-2005-november {
+    clear: left;
 }

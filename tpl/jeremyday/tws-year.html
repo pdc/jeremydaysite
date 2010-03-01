@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load markup %}
+
+{% block title %}{{ year }} - The Weekly Strip - Jeremy Day{% endblock %}
+{% block trail %}
+<div id="home-link">
+  <a href="/"><img src="{{ settings.STATIC_URL }}style/theweeklystrip-smaller.png" alt="The Weekly Strip by Jeremy Day" /></a>
+</div>
+{% endblock %}
+{% block heading %}
+  {{ year }}
+{% endblock %}
+
+{% block content %}
+
+{% for month, strips in month_strips %}
+<div id="tws-{{ year }}-{{ month|lower }}" class="tws-month tws-{{ month|lower}}">
+  <h2>{{ month }}</h2>
+
+  <ul class="tws-year">
+    {% for strip in strips %}
+    <li>
+      <a href="{% url tws_strip number=strip.number|stringformat:"d" %}">
+        <img src="{{ strip.icon_src }}" width="80" height="80" alt="" />
+        <b>{{ strip.number }} {{ strip.title|safe }}</b>
+        <small>{{ strip.date|date:"j N" }}</small>
+      </a>      
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endfor %}
+
+{% endblock %}
