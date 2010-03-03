@@ -49,7 +49,17 @@ def all_about_the_nth_strip(strips, index):
     strip = strips[index]
     prev = strips[index - 1] if 0 < index else None
     next = strips[index + 1] if index + 1 < len(strips) else None
+    jumps = give_me_jumps(strips, strip)
     
+    return {
+        'tws': strips,
+        'strip': strip,
+        'prev': prev,
+        'next': next,
+        'jumps': jumps,
+    }
+    
+def give_me_jumps(strips, strip=None):
     jumps = []
     prev_year = 0
     for other_strip in strips:
@@ -60,15 +70,7 @@ def all_about_the_nth_strip(strips, index):
             prev_year = year
     href = reverse('tws_strip', kwargs={'number': str(strips[-1]['number'])})
     jumps.append(('Latest', strips[-1], href, strip != strips[-1]))
-    
-    return {
-        'tws': strips,
-        'strip': strip,
-        'prev': prev,
-        'next': next,
-        'jumps': jumps,
-    }
-    
+    return jumps
     
 @render_with_template('jeremyday/tws-year.html')
 def year_page(request, year):
@@ -95,7 +97,7 @@ def year_page(request, year):
             lo = m + 1
     end = hi
     
-    months = ['Zeugmonth', 'January', 'Feburary', 'March', 'April', 'May', 'June',
+    months = ['Zeugmonth', 'January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December']
     month_strips = []
     cur_m = None
@@ -111,11 +113,13 @@ def year_page(request, year):
             cur_strips.append(strip)
     if cur_m:
         month_strips.append((months[cur_m], cur_strips))
-    
-    
+        
+    jumps = give_me_jumps(strips)
+            
     return {
         'month_strips': month_strips,
         'year': year,
         'prev_year': year - 1 if beg > 0 else None,
-        'next_year': year + 1 if end < len(strips) else None
+        'next_year': year + 1 if end < len(strips) else None,
+        'jumps': jumps,
     }

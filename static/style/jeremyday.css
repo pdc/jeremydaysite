@@ -701,6 +701,21 @@ h3 img {
     width: 240px;
 }
 
+#tws-jumps p {
+    float: left;
+    width: 60px;
+    height: 20px;
+    margin: 0;
+    padding: 60px 10px 0px;
+    
+    color: #CC004C;
+    font-family: "Museo Sans", sans-serif;
+    text-transform: lowercase;
+    text-align: center;
+    -moz-transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+}
+
 #tws-2003-august,
 #tws-2004-june,
 #tws-2004-october, 

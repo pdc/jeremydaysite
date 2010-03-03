@@ -52,24 +52,7 @@
   </div>
   
   <h2>Jump</h2>
-  <ul id="strip-jumps">
-    {% for label, other_strip, href, is_link in jumps %}
-    <li>
-      {% if is_link %}
-      <a href="{{ href }}"
-          title="{{ other_strip.number }}. {{ other_strip.title }} {{ other_strip.date|date:"j N Y" }}">
-        <img src="{{ other_strip.icon_src }}" alt="{{ other_strip.number }}" />
-        <b>{{ label }}</b>
-      </a>
-      {% else %}
-      <span title="{{ other_strip.number }}. {{ other_strip.title }} {{ other_strip.date|date:"j N Y" }}">
-        <img src="{{ other_strip.icon_src }}" alt="{{ other_strip.number }}" />
-        <b>{{ label }}</b>
-      </span>
-      {% endif %}
-    </li>
-    {% endfor %}
-  </ul>
+  {% include "jeremyday/jumps.html" %}
 </div>
 
 {% endblock %}
