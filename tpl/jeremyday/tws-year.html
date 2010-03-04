@@ -13,6 +13,11 @@
 
 {% block content %}
 
+<div id="tws-jumps" class="wide">
+	<p>year</p>
+  {% include "jeremyday/jumps.html" %}
+</div>
+
 {% for month, strips in month_strips %}
 <div id="tws-{{ year }}-{{ month|lower }}" class="tws-month tws-{{ month|lower}}">
   <h2>{{ month }}</h2>
