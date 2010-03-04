@@ -13,6 +13,7 @@ import markdown
 import getopt
 import codecs
 import datetime
+import time
 from django.core.cache import cache
 
 
@@ -67,12 +68,19 @@ def tws_iter(in_file, prefix):
     print 'Read', count, 'entries from', in_file
 
 TWS_CACHE_KEY = 'tws-data'
+TWS_WHEN_CACHE_KEY = 'tws-data-when'
 def get_tws(in_file, prefix):
-    result = cache.get(TWS_CACHE_KEY)
+    result = None
+    when_cached = cache.get(TWS_WHEN_CACHE_KEY)
+    if when_cached:
+        mtime = os.stat(in_file).st_mtime
+        if mtime < when_cached:
+            result = cache.get(TWS_CACHE_KEY)
     if result is None:
         result = list(tws_iter(in_file, prefix))
         result.sort(key=lambda d: d['date'])
         cache.set(TWS_CACHE_KEY, result)
+        cache.set(TWS_WHEN_CACHE_KEY, time.time())
     return result
     
 def sites_iter(in_file):
