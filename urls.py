@@ -10,6 +10,7 @@ spreadlinks_args = {
     'template_name': 'jeremyday/projects_list.html',
 }
 
+
 urlpatterns = patterns('spreadsite.spreadlinks.views',
     (r'^(?P<library_name>projects)/$', 'library_detail', spreadlinks_args, 'library_detail'),
     (r'^(?P<library_name>projects)/page(?P<page>[0-9]+)$', 'library_detail', spreadlinks_args, 'library_detail'),

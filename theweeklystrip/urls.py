@@ -6,6 +6,9 @@ urlpatterns = patterns('jeremyday.theweeklystrip.views',
     (r'^$', 'latest', {}, 'tws_latest'),
     (r'^strips/(?P<number>[0-9]+)$', 'strip_page', {}, 'tws_strip'),
     (r'^year/(?P<year>20[0-9]{2})$', 'year_page', {}, 'tws_year'),
+    (r'^bydate/(?P<year>20[0-9]{2})(?P<month>[01][0-9])(?P<day>[0-3][0-9])$', 'by_date', {}, 'tws_date'),
+    (r'^feeds/in-reading-order\.atom$', 'reading_order_feed', {}, 'tws_reading_order_feed'),
+    (r'^feeds/in-reading-order\.page(?P<page>[0-9]+)\.atom$', 'reading_order_feed', {}, 'tws_reading_order_feed'),
     # Example:
     # (r'^jeremyday/', include('jeremyday.foo.urls')),
     

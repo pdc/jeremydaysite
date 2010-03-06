@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>{{ title }}{% ifnotequal page 1 %}, page {{ page }}{% endifnotequal %}</title>
+    <id>{{ id }}</id>
+    
+    <link href="{% url tws_latest %}"/>
+    <link rel="self" href="{{ self }}"/>
+    <link rel="first" href="{{ first }}"/>
+    <link rel="last" href="{{ last }}"/>
+    {% if prev %}
+    <link rel="previous" href="{{ prev }}"/>
+    <link rel="prev" href="{{ prev }}"/>
+    {% endif %}
+    {% if next %}
+    <link rel="next" href="{{ next }}"/>
+    {% endif %}
+    <updated>{{ updated }}</updated>
+    <author>
+        <name>Jeremy Day</name>
+    </author>
+    {% for strip in strips %}
+    <entry>
+        <title>{{ strip.number }}. {{ strip.title }}</title>
+        <link href="{% url tws_strip number=strip.number|stringformat:"d" %}"/>
+        <id>{{ strip.id }}</id>
+        <published>{{ strip.date|date:"Y-m-d" }}T12:00:00Z</published>
+        <updated>{{ updated }}</updated>
+        <summary>Some text.</summary>
+    </entry>
+    {% endfor %}
+</feed>

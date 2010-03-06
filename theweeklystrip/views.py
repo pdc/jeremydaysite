@@ -1,6 +1,7 @@
+# Encoding: UTF-8
 # Create your views here.
 
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 from django.core.urlresolvers import reverse
@@ -8,6 +9,8 @@ from django.core.cache import cache
 from django.views.decorators.cache import cache_page
 from django.conf import settings
 from jeremyday import twslib
+from datetime import datetime, date
+import time
 
 def render_with_template(default_template_name, default_base_template_name='base.html'):
     """Decorator to wrap template-based rendering around a view function returning template variables."""
@@ -76,7 +79,7 @@ def give_me_jumps(strips, strip=None):
 def year_page(request, year):
     year = int(year)
     
-    strips = twslib.get_tws(settings.TWS_FILE, settings.TWS_SRC_PREFIX);
+    strips = twslib.get_tws(settings.TWS_FILE, settings.TWS_SRC_PREFIX)
     # Binary chop to find first strip for this year.
     lo, hi = 0, len(strips) # Invariant: strips[:lo] < year and year <= strips[hi:]
     while lo < hi:
@@ -123,3 +126,80 @@ def year_page(request, year):
         'next_year': year + 1 if end < len(strips) else None,
         'jumps': jumps,
     }
+    
+def by_date(request, year, month, day):
+    d = date(int(year), int(month, 10), int(day, 10))
+    strips = twslib.get_tws(settings.TWS_FILE, settings.TWS_SRC_PREFIX)
+    
+    # Binary chop (again!) to find first strip following this date.
+    lo, hi = 0, len(strips) # Invariant: strips[:lo] < d and d <= strips[hi:]
+    while lo < hi:
+        m = (lo + hi) // 2
+        if strips[m]['date'] < d:
+            lo = m + 1
+        else:
+            hi = m
+    
+    if hi < len(strips):
+        return HttpResponseRedirect(reverse('tws_strip', kwargs={'number': strips[hi]['number']}))
+    raise Http404
+   
+   
+@render_with_template('jeremyday/tws.atom') 
+def reading_order_feed(request, page=None):
+    """Returns a feed in reading order, as a 'paged feed' (see RFC 5005 for what this means).
+    
+    TWS entries have a date that is the date the strip was drawn,
+    and may differ from the date it was added to the site.
+    This feed is in strip’s date order. This means that strips inserted in to the
+    backstory will not appear in the latest-entries page.
+    
+    latest (page 1) is the most recent N entries (according to the strip dates).
+    page 2 is the next most recent N entries
+    and so on.
+    """
+    strips = twslib.get_tws(settings.TWS_FILE, settings.TWS_SRC_PREFIX)
+    per_page = settings.TWS_FEED_PER_PAGE
+    max_page = (len(strips) + per_page - 1) // per_page
+    if page:
+        page = int(page)
+    else:
+        page = 1
+        
+    # Pages count backwards from the end.
+    end = len(strips) - (page - 1) * per_page # Page 1 ends with the last strip.
+    beg = end - per_page if end > per_page else 0
+        
+    # Reverse chronooogical order means the NEXT page is OLDER strips and LAST is OLDEST strips. Right?
+    first_href = reverse('tws_reading_order_feed') 
+    last_href = reverse('tws_reading_order_feed', kwargs={'page': str(max_page)})
+    self_href = (first_href if page == 1 
+        else last_href if page == max_page
+        else reverse('tws_reading_order_feed', kwargs={'page': str(page)}))
+    next_href = (None if page == max_page
+        else reverse('tws_reading_order_feed', kwargs={'page': str(page + 1)}))
+    prev_href = (None if page == 1
+        else first_href if page == 2
+        else reverse('tws_reading_order_feed', kwargs={'page': str(page - 1)}))
+    
+    when_cached = cache.get(twslib.TWS_WHEN_CACHE_KEY)
+    updated = time.strftime('%Y-%m-%dT%H:%M:%S%z',time.localtime(when_cached))
+    
+    subset = strips[beg:end]
+    subset.reverse()
+    for strip in subset:
+        strip['id'] = 'tag:jeremyday.org.uk,2010:tws-strip:%d' % strip['number']
+    
+    tpl_args = {
+        'title': 'The Weekly Strip by Jeremy Day (in reading order)',
+        'id': 'tag:jeremyday.org.uk,2010:tws-in-reading-order',
+        'page': page,
+        'self': self_href,
+        'first': first_href,
+        'last': last_href,
+        'prev': prev_href,
+        'next': next_href,
+        'updated': updated,
+        'strips': subset,
+    }
+    return tpl_args
