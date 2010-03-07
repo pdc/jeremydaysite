@@ -128,6 +128,7 @@ def year_page(request, year):
     }
     
 def by_date(request, year, month, day):
+    """Mostly intended for doing redirects from the old site, which was organized by date not number."""
     d = date(int(year), int(month, 10), int(day, 10))
     strips = twslib.get_tws(settings.TWS_FILE, settings.TWS_SRC_PREFIX)
     
@@ -208,8 +209,8 @@ def reading_order_feed(request, page=None):
         'self': request.build_absolute_uri(self_href),
         'first': request.build_absolute_uri(first_href),
         'last': request.build_absolute_uri(last_href),
-        'prev': request.build_absolute_uri(prev_href),
-        'next': request.build_absolute_uri(next_href),
+        'prev': prev_href and request.build_absolute_uri(prev_href),
+        'next': next_href and request.build_absolute_uri(next_href),
         'updated': feed_updated,
         'strips': subset,
     }

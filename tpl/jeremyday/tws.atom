@@ -9,7 +9,6 @@
     <link rel="last" href="{{ last }}"/>
     {% if prev %}
     <link rel="previous" href="{{ prev }}"/>
-    <link rel="prev" href="{{ prev }}"/>
     {% endif %}
     {% if next %}
     <link rel="next" href="{{ next }}"/>
