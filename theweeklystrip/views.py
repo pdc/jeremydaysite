@@ -184,6 +184,7 @@ def reading_order_feed(request, page=None):
     
     when_cached = cache.get(twslib.TWS_WHEN_CACHE_KEY)
     updated = time.strftime('%Y-%m-%dT%H:%M:%S%z',time.localtime(when_cached))
+    updated = '%s:%s' % (updated[:-2], updated[-2:]) # RFC 3339 required +00:00 not +0000
     
     subset = strips[beg:end]
     subset.reverse()
