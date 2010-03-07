@@ -182,19 +182,22 @@ def reading_order_feed(request, page=None):
         else first_href if page == 2
         else reverse('tws_reading_order_feed', kwargs={'page': str(page - 1)}))
         
-    self_href = request.build_absolute_uri(self_href)
+    self_href = self_href
     
     subset = strips[beg:end]
     subset.reverse()
     twslib.add_mtimes(subset, settings.TWS_IMAGE_DIR)
     feed_updated = 0
     for strip in subset:
+        strip['icon_src'] = request.build_absolute_uri(strip['icon_src'])
+        strip['image_src'] = request.build_absolute_uri(strip['image_src'])
+        strip['page_href'] = request.build_absolute_uri(reverse('tws_strip', kwargs={'number': str(strip['number'])}))
         strip['id'] = 'tag:jeremyday.org.uk,2010:tws-strip:%d' % strip['number']
         updated = time.strftime('%Y-%m-%dT%H:%M:%S%z',time.localtime(strip['mtime']))
         updated = '%s:%s' % (updated[:-2], updated[-2:]) # RFC 3339 required +00:00 not +0000
         strip['updated'] = updated
         
-        if updated > feed_updated:
+        if updated > feed_updated: # This is the first time I have actually exploited the sortability of RFC 3339 datetimes!
             feed_updated = updated    
     
     tpl_args = {
@@ -202,11 +205,11 @@ def reading_order_feed(request, page=None):
         'id': 'tag:jeremyday.org.uk,2010:tws-in-reading-order',
         'page': page,
         'home': request.build_absolute_uri(reverse('tws_latest')),
-        'self': self_href,
-        'first': first_href,
-        'last': last_href,
-        'prev': prev_href,
-        'next': next_href,
+        'self': request.build_absolute_uri(self_href),
+        'first': request.build_absolute_uri(first_href),
+        'last': request.build_absolute_uri(last_href),
+        'prev': request.build_absolute_uri(prev_href),
+        'next': request.build_absolute_uri(next_href),
         'updated': feed_updated,
         'strips': subset,
     }

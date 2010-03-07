@@ -21,17 +21,17 @@
     {% for strip in strips %}
     <entry>
         <title>{{ strip.number }}. {{ strip.title }}</title>
-        <link href="{% url tws_strip number=strip.number|stringformat:"d" %}"/>
+        <link href="{{ strip.page_href }}"/>
         <id>{{ strip.id }}</id>
         <published>{{ strip.date|date:"Y-m-d" }}T12:00:00Z</published>
         <updated>{{ strip.updated }}</updated>
         <summary type="xhtml">
             <div xmlns="http://www.w3.org/1999/xhtml">
-                <a href="{% url tws_strip number=strip.number|stringformat:"d" %}">
-                    <img src="{{ strip.icon_src }}" alt="" style="float: left; margin-right: 1em"/>
+                <a href="{{ strip.page_href }}">
+                    <img src="{{ strip.icon_src }}" alt="" align="left" style="float: left; margin-right: 1em"/>
                     <b>{{ strip.number }}. {{ strip.title }}</b>
                     <br/>
-                    <small>{{ strip.date|date:"d N Y" }}</small>
+                    <small>{{ strip.date|date:"j N Y" }}</small>
                 </a>
             </div>
         </summary>
