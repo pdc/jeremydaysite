@@ -12,7 +12,7 @@ from jeremyday import twslib
 from datetime import datetime, date
 import time
 
-def render_with_template(default_template_name, default_base_template_name='base.html'):
+def render_with_template(default_template_name, default_base_template_name='base.html', mimetype='text/html'):
     """Decorator to wrap template-based rendering around a view function returning template variables."""
     def decorator(func):
         def wrapped_handler(request, template_name=None, base_template_name=None, *args, **kwargs):
@@ -21,7 +21,7 @@ def render_with_template(default_template_name, default_base_template_name='base
                 return result
             if not result.get('base_template_name'):
                 result['base_template_name'] = base_template_name or default_base_template_name
-            return render_to_response(template_name or default_template_name, result, RequestContext(request))
+            return render_to_response(template_name or default_template_name, result, RequestContext(request), mimetype=mimetype)
         return wrapped_handler
     return decorator
     
@@ -145,7 +145,7 @@ def by_date(request, year, month, day):
     raise Http404
    
    
-@render_with_template('jeremyday/tws.atom') 
+@render_with_template('jeremyday/tws.atom', mimetype='application/atom+xml') 
 def reading_order_feed(request, page=None):
     """Returns a feed in reading order, as a 'paged feed' (see RFC 5005 for what this means).
     
@@ -181,26 +181,33 @@ def reading_order_feed(request, page=None):
     prev_href = (None if page == 1
         else first_href if page == 2
         else reverse('tws_reading_order_feed', kwargs={'page': str(page - 1)}))
-    
-    when_cached = cache.get(twslib.TWS_WHEN_CACHE_KEY)
-    updated = time.strftime('%Y-%m-%dT%H:%M:%S%z',time.localtime(when_cached))
-    updated = '%s:%s' % (updated[:-2], updated[-2:]) # RFC 3339 required +00:00 not +0000
+        
+    self_href = request.build_absolute_uri(self_href)
     
     subset = strips[beg:end]
     subset.reverse()
+    twslib.add_mtimes(subset, settings.TWS_IMAGE_DIR)
+    feed_updated = 0
     for strip in subset:
         strip['id'] = 'tag:jeremyday.org.uk,2010:tws-strip:%d' % strip['number']
+        updated = time.strftime('%Y-%m-%dT%H:%M:%S%z',time.localtime(strip['mtime']))
+        updated = '%s:%s' % (updated[:-2], updated[-2:]) # RFC 3339 required +00:00 not +0000
+        strip['updated'] = updated
+        
+        if updated > feed_updated:
+            feed_updated = updated    
     
     tpl_args = {
         'title': 'The Weekly Strip by Jeremy Day (in reading order)',
         'id': 'tag:jeremyday.org.uk,2010:tws-in-reading-order',
         'page': page,
+        'home': request.build_absolute_uri(reverse('tws_latest')),
         'self': self_href,
         'first': first_href,
         'last': last_href,
         'prev': prev_href,
         'next': next_href,
-        'updated': updated,
+        'updated': feed_updated,
         'strips': subset,
     }
     return tpl_args

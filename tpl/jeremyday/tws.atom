@@ -3,7 +3,7 @@
     <title>{{ title }}{% ifnotequal page 1 %}, page {{ page }}{% endifnotequal %}</title>
     <id>{{ id }}</id>
     
-    <link href="{% url tws_latest %}"/>
+    <link href="{{ home }}"/>
     <link rel="self" href="{{ self }}"/>
     <link rel="first" href="{{ first }}"/>
     <link rel="last" href="{{ last }}"/>
@@ -24,8 +24,17 @@
         <link href="{% url tws_strip number=strip.number|stringformat:"d" %}"/>
         <id>{{ strip.id }}</id>
         <published>{{ strip.date|date:"Y-m-d" }}T12:00:00Z</published>
-        <updated>{{ updated }}</updated>
-        <summary>Some text.</summary>
+        <updated>{{ strip.updated }}</updated>
+        <summary type="xhtml">
+            <div xmlns="http://www.w3.org/1999/xhtml">
+                <a href="{% url tws_strip number=strip.number|stringformat:"d" %}">
+                    <img src="{{ strip.icon_src }}" alt="" style="float: left; margin-right: 1em"/>
+                    <b>{{ strip.number }}. {{ strip.title }}</b>
+                    <br/>
+                    <small>{{ strip.date|date:"d N Y" }}</small>
+                </a>
+            </div>
+        </summary>
     </entry>
     {% endfor %}
 </feed>

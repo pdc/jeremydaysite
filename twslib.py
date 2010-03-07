@@ -62,6 +62,7 @@ def tws_iter(in_file, prefix):
             date = datetime.date(int(s[:4]), int(s[4:6], 10), int(s[6:8], 10))
             d['date'] = date
             d['number'] = count
+            d['image_src_sans_prefix'] = '%s/%s' % (s[:4], d['image_src'])
             d['image_src'] = '%s%s/%s' % (prefix, s[:4], d['image_src'])
             d['icon_src'] = '%s%s/%s' % (prefix, s[:4], d['icon_src'])
             yield d
@@ -82,6 +83,14 @@ def get_tws(in_file, prefix):
         cache.set(TWS_CACHE_KEY, result)
         cache.set(TWS_WHEN_CACHE_KEY, time.time())
     return result
+    
+def add_mtimes(strips, image_dir):
+    for strip in strips:
+        if 'mtime' not in strip:
+            image_file = os.path.join(image_dir, strip['image_src_sans_prefix'])
+            mtime = os.stat(image_file).st_mtime
+            strip['mtime'] = mtime
+    return strips
     
 def sites_iter(in_file):
     """Load the list of other web sites."""
