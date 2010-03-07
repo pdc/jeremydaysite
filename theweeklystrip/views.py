@@ -59,6 +59,8 @@ def all_about_the_nth_strip(strips, index):
         'strip': strip,
         'prev': prev,
         'next': next,
+        'first': strips[0],
+        'last': strips[-1],
         'jumps': jumps,
     }
     
