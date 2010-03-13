@@ -39,7 +39,7 @@ def strip_conneg(request, number):
     
 format_mimetypes = {
     'xml': 'application/rdf+xml',
-    'n3': 'text/plain',
+    'n3': 'text/n3',
 }
 def strip_rdf(request, number, format):
     ordinal = int(number)
@@ -65,15 +65,15 @@ def strip_rdf(request, number, format):
     graph.add((strip_subject, RDF.type, ALLEGED['comic']))
     graph.add((strip_subject, DC['creator'], Literal('Jeremy Day')))
     graph.add((strip_subject, DC['title'], Literal(strip['title'])))
-    graph.add((strip_subject, DC['date'], Literal(strip['date'].isoformat())))
+    graph.add((strip_subject, DC['date'], Literal(strip['date'])))
     
     graph.add((strip_subject, ALLEGED['excerpt'], URIRef(strip['icon_src'])))
     graph.add((strip_subject, ALLEGED['image'], URIRef(strip['image_src'])))
     
     if ordinal > 1:
-        graph.add((strip_subject, ALLEGED['prev-page'], TWS[str(ordinal - 1)]))
+        graph.add((strip_subject, ALLEGED['prev-page'], TWS['strip%d' % (ordinal - 1)]))
     if ordinal < len(strips):
-        graph.add((strip_subject, ALLEGED['next-page'], TWS[str(ordinal + 1)]))
+        graph.add((strip_subject, ALLEGED['next-page'], TWS['strip%d' % (ordinal + 1)]))
     
     response = HttpResponse(graph.serialize(format=format),
         mimetype=format_mimetypes[format])
