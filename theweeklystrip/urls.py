@@ -13,4 +13,7 @@ urlpatterns = patterns('jeremyday.theweeklystrip.views',
     # (r'^jeremyday/', include('jeremyday.foo.urls')),
     
     #(r'^$', 'library_list', spreadlinks_args, 'library_list'),
+) + patterns('jeremyday.theweeklystrip.rdf_views',
+    (r'^r/strip(?P<number>[0-9]+)$', 'strip_conneg', {}, 'tws_strip_resource'),
+    (r'^data/strip(?P<number>[0-9]+).(?P<format>n3|xml)$', 'strip_rdf', {}, 'tws_strip_rdf'),
 )

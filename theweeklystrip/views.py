@@ -1,5 +1,4 @@
 # Encoding: UTF-8
-# Create your views here.
 
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.template import RequestContext
@@ -217,3 +216,5 @@ def reading_order_feed(request, page=None):
         'strips': subset,
     }
     return tpl_args
+    
+    
