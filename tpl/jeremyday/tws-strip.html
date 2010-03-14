@@ -4,6 +4,10 @@
 {% block links %}
 <link rel="alternate" type="application/atom+xml" href="{% url tws_reading_order_feed %}" 
     title="The weekly Strip by Jeremy Dennis (in reading order)" />
+<link rel="alternate" type="application/rdf+xml" href="{% url tws_strip_rdf number=strip.number|stringformat:"d",format="xml" %}" 
+    title="{{ strip.title }} metadata (RDF/XML)" />
+<link rel="alternate" type="text/n3" href="{% url tws_strip_rdf number=strip.number|stringformat:"d",format="n3" %}" 
+    title="{{ strip.title }} metadata (N3)" />
     
 <link rel="start" href="{% url tws_strip number=first.number|stringformat:"d" %}"
           title="{{ first.number }}. {{ first.title }} {{ first.date|date:"j N Y" }}" />
