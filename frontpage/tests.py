@@ -6,6 +6,8 @@ Replace these with more appropriate tests for your application.
 """
 
 from django.test import TestCase
+import os
+from jeremyday.livejournal import *
 
 class SimpleTest(TestCase):
     def test_basic_addition(self):
@@ -14,10 +16,24 @@ class SimpleTest(TestCase):
         """
         self.failUnlessEqual(1 + 1, 2)
 
-__test__ = {"doctest": """
-Another way to test that 1 + 1 is equal to 2.
-
->>> 1 + 1 == 2
-True
-"""}
-
+        
+    def test_entries(self):
+        print os.getcwd()
+        with open('frontpage/lj-test.html', 'rb') as input:
+            html = input.read()
+            
+        entries = entries_from_livejournal_html(html)
+        self.assertEqual(19, len(entries)) # 20 entries of which one is friends-locked.
+        for i, entry in enumerate(entries):
+            self.assert_(entry['title'], 'expected title for entry #%d' % i)
+            self.assert_(entry['href'], 'expected href for entry #%d' % i)
+            self.assert_(entry['content'], 'expected content for entry #%d' % i)
+            self.assert_(entry['userpic']['src'], 'expected userpic.src for entry #%d' % i)
+            self.assertEqual(100, entry['userpic']['width'], 'expected userpic.src for entry #%d' % i)
+            self.assert_(entry['content'])
+            self.assert_('class="user-icon"' not in entry['content'])
+            
+        self.assertEqual(datetime(2010, 3, 18, 23, 45, 0), entries[0]['published'])
+        self.assertEqual(datetime(2010, 3, 16, 21, 41, 0), entries[3]['published'])
+        self.assertEqual(datetime(2010, 3, 16, 0, 1, 0), entries[4]['published'])
+        self.assertEqual(datetime(2010, 3, 11, 8, 35, 0), entries[7]['published'])

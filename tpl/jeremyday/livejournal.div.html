@@ -1,0 +1,20 @@
+<div id="livejournal">
+  {% for entry in feed %}
+  <div class="entry">
+    <h3>{{ entry.title }}</h3>
+    <div class="entry-info">
+      <img src="{{ entry.userpic.src }}" title="{{ entry.userpic.src }}" width="{{ entry.userpic.width }}" height="{{ entry.userpic.width }}" />
+      <small>{{ entry.published|date:"P" }}</small>      
+      <div class="entry-published">
+        <span class="weekday">{{ entry.published|date:"D" }}</span>
+        <span class="day">{{ entry.published|date:"j" }}</span>
+        <span class="month">{{ entry.published|date:"N" }}</span>
+      </div>
+    </div>
+    <div class="entry-content">
+      {{ entry.content|safe }}
+    </div>
+    <div class="entry-footer"></div>
+  </div>
+  {% endfor %}
+</div>

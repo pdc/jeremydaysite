@@ -311,41 +311,69 @@ p {
     text-decoration: underline;
 }
 
-/* Livejournal has the most layered HTML you have ever seen */
+.entry h3 {
+    margin: 1.23em 10px 0.616em;
+    color: #CC004C;
+}
 
-.asset-meta-list {
-    font-size: 85%;
+.entry-info {
+    display: block;
+    float: left;
+    margin: 0.25em 10px;
+    width: 60px;
+    
+    font-family: "Museo Sans", sans-serif;
+}
+
+.entry-info img {
+    display: block;
+    width: 60px;
+    height: 60px;
+}
+
+.entry-info small {
+    display: block;
+    font-size: 0.85em;
+    margin: 10px 0 10px 0;
+    
+    text-align: center;
     color: #999;
 }
-.asset-meta-list li {
-    list-style-type: none;
-    margin: 0 10px;
+
+.entry-info span.weekday {
+    display: block;
+    font-size: 1em;
+    
+    text-align: center;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
 }
 
-.post-asset {
+.entry-info span.day {
+    display: block;
+    font-size: 3em;
+    
+    text-align: center;
+    line-height: 1;
+}
+
+.entry-info span.month {
+    display: block;
+    font-size: 0.85em;
+    
+    text-align: center;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.entry-content {
     position: relative;
-    margin: 1.23em 0;
-    padding: 0 10px 0 80px;
-}
-/* Livejournal has 34 layes of divs with helpful class names
- ... and then the text itself is naked with paragraphs separated by BR tags.
- All we can do is indent the lot and hope for the best. */
-.asset-body {
-    margin: 0 10px;
-}
-#main .asset-body p {
-    margin: 1.23em 0;
+    margin: 0 0 1.23em;
+    padding: 0 10px 0 90px;
 }
 
-.user-icon {
-    position: absolute;
-    left: 10px;
-    top: 0;
-}
-.user-icon img {
-    width: 70px;
-    height: 70px;
-}
 
 h4 {
     font-size: 1em;
@@ -357,21 +385,7 @@ h4 {
     color: #999;
 }
 
-.asset-tags-list,
-.asset-meta-list {
-    width: 100%;
-    float: left;
-    margin: 0.616em 0;
-}
-
-.asset-tags-list li,
-.asset-meta-list li {
-    float: left;
-    margin: 0 10px;
-    list-style-type: none;
-}
-
-.asset-footer {
+.entry-footer {
     clear: both;
 }
 
