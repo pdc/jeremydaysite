@@ -1,7 +1,7 @@
 <div id="livejournal">
   {% for entry in feed %}
   <div class="entry">
-    <h3>{{ entry.title }}</h3>
+    <h3><a href="{{ entry.href }}">{{ entry.title }}</a></h3>
     <div class="entry-info">
       <img src="{{ entry.userpic.src }}" title="{{ entry.userpic.src }}" width="{{ entry.userpic.width }}" height="{{ entry.userpic.width }}" />
       <small>{{ entry.published|date:"P" }}</small>      
@@ -14,7 +14,15 @@
     <div class="entry-content">
       {{ entry.content|safe }}
     </div>
-    <div class="entry-footer"></div>
+    <div class="entry-footer">
+      <p>
+        {% if entry.comment_count %}
+        <a href="{{ entry.href }}?nc={{ entry.comment_count }}">{{ entry.comment_count }} worm{{ entry.comment_count|pluralize }}</a>
+        |
+        {% endif %}
+        <a href="{{ entry.href}}?mode=reply">Feed the birds</a>
+      </p>
+    </div>
   </div>
   {% endfor %}
 </div>

@@ -373,6 +373,11 @@ p {
     margin: 0 0 1.23em;
     padding: 0 10px 0 90px;
 }
+.entry-footer {
+    clear: both;
+    margin: 1.23em 0;
+    padding: 0 0 0 80px;
+}
 
 
 h4 {

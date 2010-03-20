@@ -23,7 +23,7 @@ class SimpleTest(TestCase):
             html = input.read()
             
         entries = entries_from_livejournal_html(html)
-        self.assertEqual(19, len(entries)) # 20 entries of which one is friends-locked.
+        self.assertEqual(14, len(entries)) # 20 entries of which one is friends-locked.
         for i, entry in enumerate(entries):
             self.assert_(entry['title'], 'expected title for entry #%d' % i)
             self.assert_(entry['href'], 'expected href for entry #%d' % i)
@@ -33,7 +33,11 @@ class SimpleTest(TestCase):
             self.assert_(entry['content'])
             self.assert_('class="user-icon"' not in entry['content'])
             
-        self.assertEqual(datetime(2010, 3, 18, 23, 45, 0), entries[0]['published'])
-        self.assertEqual(datetime(2010, 3, 16, 21, 41, 0), entries[3]['published'])
-        self.assertEqual(datetime(2010, 3, 16, 0, 1, 0), entries[4]['published'])
-        self.assertEqual(datetime(2010, 3, 11, 8, 35, 0), entries[7]['published'])
+        self.assertEqual(datetime(2010, 3, 17, 23, 21, 0), entries[0]['published'])
+        self.assertEqual(datetime(2010, 3, 16, 21, 41, 0), entries[1]['published'])
+        self.assertEqual(datetime(2010, 3, 16, 0, 1, 0), entries[2]['published'])
+        self.assertEqual(datetime(2010, 3, 11, 8, 35, 0), entries[4]['published'])
+        
+        self.assertEqual(8, entries[0]['comment_count'])        
+        self.assertEqual(9, entries[1]['comment_count'])
+        self.assertEqual(0, entries[5]['comment_count']) # Had to search for a post with no comments...!

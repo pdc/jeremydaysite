@@ -84,4 +84,13 @@ def entries_from_livejournal_html_iter(html):
             }
         img_soup.parent.extract()
         entry['content'] = unicode(body)
+        
+        for comment_soup in entry_soup.find('li', 'asset-meta-comments item asset-meta-no-comments'):
+            s = comment_soup.string
+            if s.endswith(' worms'):
+                entry['comment_count'] = int(s[:-5], 10)
+                break
+        else:
+            entry['comment_count'] = 0
+            
         yield entry
