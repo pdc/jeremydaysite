@@ -1,0 +1,172 @@
+/* Style sheet for Jeremy's section on the alleghed lit site */
+/* Time-stamp: <pdc 2004-02-05> */
+
+html {
+	margin: 0pt;
+	padding: 0pt;
+}
+
+acronym, abbr {
+	font-style: inherit;
+	border-bottom: 1px dotted #999;
+}
+
+body {
+	font-family: Georgia, serif;
+	line-height: 1.4;
+
+	background-image: url(http://static.jeremyday.org.uk/style/jeremyday-bg.gif);
+	background-color: #CC004C;
+	color: #FFF;
+	margin: 2px;
+	padding-top: 24pt;
+	padding-right: 20%;
+	padding-bottom: 36pt;
+	padding-left: 10%;
+}
+
+code {
+	font-family: georgia, serif;
+	font-style: italic;
+}
+
+#menu {
+	text-align: center;
+}
+
+div.content {
+	padding: 0.5em;
+	background-image: none;
+	background-color: #FFF;
+	color: #000;
+	border: 1px dotted black;
+}
+
+h1, h2 {
+	font-family: Georgia, serif;
+	font-weight: normal;
+	font-style: italic;
+}
+
+h1 {
+	margin: 1em 0.5em;
+}
+
+h2 {
+	font-style: italic;
+}
+
+img.left,
+img[align="left"] {
+	margin-right: 8px;
+}
+
+img.right {
+	margin-left: 8px;
+}
+
+#weeklyStrip img {
+	border: 1px solid #666;
+}
+
+p.path {
+	position: absolute;
+	left: 1px;
+	top: 1px;
+	background-color: #CC004C;
+
+	color: #FFF;
+	padding: 1pt 0.5em;
+	margin: 0pt;
+}
+
+p {
+	margin: 12pt 12pt 0pt 3em;
+}
+
+table.sidebar {
+	background-color: #FFF;
+	float: right;
+	border: 1px dotted black;
+}
+
+td {
+	background-color: #FFF;
+	color: black;
+	padding: 0.5em;
+	font-family: sans-serif;
+}
+
+div.sidebar p {
+	margin: 0pt;
+}
+
+#details {
+	border-top: 1px dotted maroon;
+}
+
+a:link {
+	color: blue;
+}
+
+a:visited {
+	color: navy;
+}
+
+a:hover {
+	background-color: #FFF;
+	color: red;
+	text-decoration: underline;
+}
+
+a:active {
+	background-color: yellow;
+}
+
+span.new {
+	background-color: maroon;
+	color: yellow;
+}
+
+tr.nav td {
+	font-family: verdana, sans-serif;
+	font-weight: bold;
+}
+
+tr.nav td a {
+	font-weight: 400;
+}
+
+td.title {
+	font-family: verdana, sans-serif;
+	font-weight: bold;
+}
+
+table.strip {
+	background-color: #FFF;
+	border: 2px dotted black;
+	padding: 0.5em;
+}
+	
+#weeklyStrip {
+	font-size: small;
+	font-weight: 400;	
+	line-height: 1.2;
+	background-color: #FFF;
+	border: 1px dotted black;
+	width: 120px;
+	position: absolute;
+	top: 24pt;
+	right: 6pt;
+}
+
+#weeklyStrip h2 {
+	font-size: medium;
+	font-weight: bold;
+	ling-height: 1.1;
+	margin: 6pt 6pt 12pt 6pt;
+}
+
+#weeklyStrip p {
+	margin: 12pt 6pt;
+}
