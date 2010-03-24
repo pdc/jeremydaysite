@@ -50,7 +50,7 @@ function twitterTo(data, list) {
     }   
 }
 
-$(document).ready(function () {
+$(document).ready(function () {    
     var livejournal$ = $('#livejournal');
     livejournal$.prev('h2').addClass('loading');
     $.ajax({

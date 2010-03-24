@@ -16,7 +16,7 @@ function checkImageWidth(img$) {
     }
 }
 
-$(document).ready(function () {
+$(document).ready(function () {    
     var img$ = $('#strip img');
     if (img$.get(0).complete) { // This is intended to get it when the image comes from the cache.
         checkImageWidth(img$);

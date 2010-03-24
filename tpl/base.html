@@ -35,6 +35,9 @@
       <div class="clear"></div>
     </div>
     {% block poweredby %}{% endblock %}
+    
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ settings.STATIC_URL }}js/tab-overlay.js"></script>
     {% block javascript %}{% endblock %}
   </body>
 </html>

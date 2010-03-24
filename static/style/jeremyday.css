@@ -33,6 +33,7 @@ body {
 }
 
 #top {
+    position: relative;
     padding: 1px 0;
     background: #CC004C url(jeremyday-bg.gif);
 }
@@ -115,6 +116,21 @@ h1 img {
 #tabs li a:active {
     color: #CC004C;
     text-decoration: underline;
+}
+
+.tabs-overlay {
+    position: absolute;
+    right: 10px;
+    bottom: 0;
+    width: 536px; /* 4 * 134px */
+    height: 50px;
+}
+
+.tabs-overlay a {
+    display: block;
+    position: absolute;
+    width: 134px;
+    height: 50px;
 }
 
 p {
