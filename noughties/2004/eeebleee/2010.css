@@ -1,0 +1,31 @@
+/* CSS tweaks added by pdc in 2010 */
+
+body {
+    font-size: 13px;
+    font-family: verdana, sans-serif;
+}
+
+p#trail {
+    position: absolute;
+    margin: 0;
+    padding: 4px 8px;
+    left: 0;
+    top: 0;
+    
+    background-color: #311;
+    color: #CCC;
+}
+
+a:link {
+    color: #C96;
+}
+
+a:visited {
+    color: #CA9;
+}
+
+a:hover,
+a:active {
+    color: #F93;
+}
+    
