@@ -564,8 +564,9 @@ a:hover h3 {
 h3 img {
     display: block;
     float: left;
-    margin: 10px 10px 10px -160px;
+    margin: 0 10px 0 -160px;
     max-width: 140px;
+    width: 140px;
 }
 
 #links li p {
