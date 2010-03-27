@@ -28,4 +28,9 @@ a:hover,
 a:active {
     color: #F93;
 }
+
+.footnote {
+    font-size: 11px;
+    width: 16em;
+}
     
