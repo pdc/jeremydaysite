@@ -7,7 +7,9 @@ Replace these with more appropriate tests for your application.
 
 from django.test import TestCase
 import os
+from datetime import datetime
 from jeremyday.livejournal import *
+from jeremyday.context_processors import *
 
 class SimpleTest(TestCase):
     def test_basic_addition(self):
@@ -41,3 +43,19 @@ class SimpleTest(TestCase):
         self.assertEqual(8, entries[0]['comment_count'])        
         self.assertEqual(9, entries[1]['comment_count'])
         self.assertEqual(0, entries[5]['comment_count']) # Had to search for a post with no comments...!
+        
+    def test_date_coverage(self):
+        self.assertEqual(True, is_date_covered(datetime(2010, 4, 7), datetime(2010, 4, 7)))
+        self.assertEqual(False, is_date_covered(datetime(2010, 4, 7), datetime(2010, 4, 6)))
+        self.assertEqual(False, is_date_covered(datetime(2010, 4, 7), datetime(2010, 4, 9)))
+        self.assertEqual(True, is_date_covered(datetime(2010, 4, 7), datetime(2010, 4, 8, 10, 0, 0)))
+        self.assertEqual(False, is_date_covered(datetime(2010, 4, 7), datetime(2010, 4, 8, 13, 0, 0)))
+        self.assertEqual(True, is_date_covered(datetime(2010, 4, 7), datetime(2010, 4, 6, 13, 0, 0)))
+        self.assertEqual(False, is_date_covered(datetime(2010, 4, 7), datetime(2010, 4, 6, 10, 0, 0)))
+        
+    def test_cass_naked_date(self):
+        self.assertEqual(datetime(2010, 4, 7), css_naked_date(2010))
+        
+    def test_cass_naked_date_default(self):
+        self.assertEqual(css_naked_date(datetime.now().year), css_naked_date())
+        

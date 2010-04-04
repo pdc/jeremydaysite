@@ -3,7 +3,11 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>{% block title %}Title of page{% endblock %}</title>
+    {% if is_css_naked %}
+    <!-- No stylesheets on CSS Naked Day -->
+    {% else %}
     <link rel="stylesheet" type="text/css" href="{{ settings.STATIC_URL }}style/jeremyday.css" />
+    {% endif %}
     {% block links %}{% endblock %}
     <meta name="author" content="Jeremy Day" />
     {% block meta %}{% endblock %}
@@ -18,22 +22,25 @@
       {% block h1 %}
       <h1>{% block heading %}Heading goes here{% endblock %}</h1>
       {% endblock %}
-      {% block tabs %}
-      <div id="tabs">
-        <ul>
-          {% block tab-home %}<li id="tab-home"><a href="/">Home</a></li>{% endblock %}
-          {% block tab-projects %}<li id="tab-projects"><a href="/projects/">Projects</a></li>{% endblock %}
-          {% block tab-whores %}<li id="tab-whores"><a href="http://whoresofmensa.com/">Whores</a></li>{% endblock %}
-          {% block tab-1999 %}<li id="tab-1999"><a href="http://lastcentury.jeremyday.org.uk/">1999</a></li>{% endblock %}
-        </ul>
-      </div>
-      {% endblock %}
     </div>
     <div id="content">
       {% block content %}
       {% endblock %}
       <div class="clear"></div>
     </div>
+    
+    {% block tabs %}
+    <div id="tabs">
+      <p class="accesibility">Site navigation:</p>
+      <ul>
+        {% block tab-home %}<li id="tab-home"><a href="/">Home</a></li>{% endblock %}
+        {% block tab-projects %}<li id="tab-projects"><a href="/projects/">Projects</a></li>{% endblock %}
+        {% block tab-whores %}<li id="tab-whores"><a href="http://whoresofmensa.com/">Whores</a></li>{% endblock %}
+        {% block tab-1999 %}<li id="tab-1999"><a href="http://lastcentury.jeremyday.org.uk/">1999</a></li>{% endblock %}
+      </ul>
+    </div>
+    {% endblock %}
+      
     {% block poweredby %}{% endblock %}
     
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
