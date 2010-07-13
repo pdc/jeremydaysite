@@ -59,13 +59,19 @@ ADMIN_MEDIA_PREFIX = '/media/'
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'w1oim%8yfl75mey03=m&^mmnk+$a^ddrlo%*wy^b0@10)in5#&'
 
+STATIC_URL = 'http://localhost/~pdc/jeremyday/'
+
 FRONTPAGE_DIR = local_file('content')
-TWS_FILE = local_file('content/tws.data');
+LIVEJOURNAL_URL = 'http://cleanskies.livejournal.com/'
+LIVEJOURNAL_ATOM_URL = 'http://cleanskies.livejournal.com/data/atom'
+TWS_FILE = local_file('content/tws.data')
+TWS_SRC_PREFIX = STATIC_URL
+TWS_IMAGE_DIR = local_file('static')
+TWS_FEED_PER_PAGE = 20
 
 SPREADLINKS_DIR = local_file('linklibraries')
 SPREADLINKS_PER_PAGE = 20
 
-STATIC_URL = 'http://static.jeremyday.org.uk/'
 
 
 # List of callables that know how to import templates from various sources.
@@ -81,6 +87,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     "django.core.context_processors.i18n",
     "django.core.context_processors.media",
     "jeremyday.context_processors.settings",
+    "jeremyday.context_processors.is_css_naked",
 ]
 
 MIDDLEWARE_CLASSES = (
