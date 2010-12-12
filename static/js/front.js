@@ -75,6 +75,6 @@ $(document).ready(function () {
         success: function (data, textStatus, request) {
             twitterTo(data, twitter$);
             twitter$.prev('h2').removeClass('loading');
-        },
+        }
     });
 });
