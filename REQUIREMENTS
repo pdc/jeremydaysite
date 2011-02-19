@@ -1,0 +1,7 @@
+BeautifulSoup==3.2.0
+Django==1.2.5
+Markdown==2.0.3
+distribute==0.6.10
+httplib2==0.6.0
+rdflib==3.0.0
+wsgiref==0.1.2
