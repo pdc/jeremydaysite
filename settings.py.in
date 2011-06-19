@@ -64,6 +64,7 @@ STATIC_URL = 'http://localhost/~pdc/jeremyday/'
 FRONTPAGE_DIR = local_file('content')
 LIVEJOURNAL_URL = 'http://cleanskies.livejournal.com/'
 LIVEJOURNAL_ATOM_URL = 'http://cleanskies.livejournal.com/data/atom'
+HTTPLIB2_CACHE_DIR = '/Users/pdc/Library/Caches/jeremyday/httplib2'
 TWS_FILE = local_file('content/tws.data')
 TWS_SRC_PREFIX = STATIC_URL
 TWS_IMAGE_DIR = local_file('static')
@@ -108,7 +109,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.markup',
-    
+
     'spreadsite.spreadlinks',
     'jeremyday.frontpage',
 )

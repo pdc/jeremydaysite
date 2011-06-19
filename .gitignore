@@ -1,3 +1,4 @@
 *.pyc
 dev.db
 *.lineform/
+settings.py
