@@ -20,7 +20,7 @@ img {
 
 body {
     font-size: 81.25%; /* Often this means 13px */
-    
+
     font-family: "Verdana", sans-serif;
     line-height: 1.23; /* Often this will be 16px */
     background: #EEE url(jeremyday-bg-pale.png);
@@ -42,7 +42,7 @@ body {
 h1 {
     font-size: 6em;
     margin: 0.667em 10px 0;
-    
+
     font-family: "Chunk Five", "Clarendon BT", "Clarendon", sans-serif;
     color: #FFF;
     text-shadow: #000 1px 1px 3px;
@@ -65,7 +65,7 @@ h1 img {
 
 #tabs li {
     float: left;
- 
+
     list-style-type: none;
     font-family: "Chunk Five", "Clarendon", "Clarendon BT", serif;
     color: #EEE;
@@ -96,7 +96,7 @@ h1 img {
     height: 16px;
     padding: 17px;
     line-height: 1;
-    
+
     color: inherit;
     text-decoration: none;
 }
@@ -165,7 +165,7 @@ p {
 /*
 * Front page basic layout
 */
-    
+
 
 .col {
     float: left;
@@ -191,7 +191,7 @@ p {
 .tws-year li {
     font-size: 0.85em;
     float: left;
-    
+
     list-style-type: none;
 }
 
@@ -209,7 +209,7 @@ p {
     float: left;
     width: 220px;
     padding: 0.5em 10px;
-    
+
     color: inherit;
     text-decoration: none;
     -moz-border-radius: 4px;
@@ -219,7 +219,7 @@ p {
 #tws li a:hover,
 .tws-year li a:hover {
     z-index: 10;
-    
+
     background-color: #FFF;
     -moz-box-shadow: #000 2px 2px 5px;
     -webkit-box-shadow: #000 2px 2px 5px;
@@ -275,8 +275,8 @@ p {
     background-color: #FFF;
     border-bottom: 1px solid #CC004C;
 }
-    
-    
+
+
 
 #main p {
     margin: 0.616em 10px 1.23em;
@@ -295,7 +295,7 @@ p {
     float: right;
     margin: 0 10px 0 20px;
 }
-    
+
 .picture small {
     font-size: 1em;
     display: block;
@@ -342,7 +342,7 @@ p {
     float: left;
     margin: 0.25em 10px;
     width: 60px;
-    
+
     font-family: "Museo Sans", sans-serif;
 }
 
@@ -356,7 +356,7 @@ p {
     display: block;
     font-size: 0.85em;
     margin: 10px 0 10px 0;
-    
+
     text-align: center;
     color: #999;
 }
@@ -364,7 +364,7 @@ p {
 .entry-info span.weekday {
     display: block;
     font-size: 1em;
-    
+
     text-align: center;
     line-height: 1;
     text-transform: uppercase;
@@ -374,7 +374,7 @@ p {
 .entry-info span.day {
     display: block;
     font-size: 3em;
-    
+
     text-align: center;
     line-height: 1;
 }
@@ -382,7 +382,7 @@ p {
 .entry-info span.month {
     display: block;
     font-size: 0.85em;
-    
+
     text-align: center;
     line-height: 1;
     text-transform: uppercase;
@@ -406,7 +406,7 @@ h4 {
     float: left;
     width: 50px;
     margin: 0.616em 0 0 -70px;
-    
+
     font-weight: normal;
     color: #999;
 }
@@ -417,7 +417,7 @@ h4 {
 
 
 /* Twitter */
-    
+
 ul.links {
     padding: 0.25em 0;
 }
@@ -446,7 +446,7 @@ ul.links {
 .links li a,
 #cleanskies li a {
     display: block;
-    
+
     color: inherit;
     text-decoration: none;
     -moz-border-radius: 4px;
@@ -461,7 +461,7 @@ ul.links {
     font-weight: normal;
 }
 
-#cleanskies li a {    
+#cleanskies li a {
     padding: 0.5em 10px;
 }
 
@@ -501,7 +501,7 @@ h2 {
     font-size: 1.38em; /* Often this will be 18px */
     clear: both;
     padding: 0.89em 10px 0;
-    
+
     font-family: "Museo Sans", sans-serif;
     text-transform: lowercase;
     line-height: 1.333;
@@ -531,7 +531,7 @@ h2.loading {
 #links a {
     display: block;
     min-height: 70px;
-    
+
     color: inherit;
     text-decoration: inherit;
 }
@@ -551,7 +551,7 @@ h3 {
     font-size: 1.38em;
     margin: 0 10px;
     width: 620px;
-    
+
     font-family: "Museo Sans", sans-serif;
     font-weight: normal;
     text-transform: lowercase;
@@ -593,7 +593,7 @@ h3 img {
     width: 220px;
     margin: 0 0 0 720px;
     padding: 0.33em 10px;
-    
+
     text-align: center;
     background: #444 url(jeremyday-bg-dark.png);
 }
@@ -608,7 +608,7 @@ h3 img {
     width: 800px;
     min-height: 1200px;
     float: left;
-    
+
     background-color: #FFF;
 }
 
@@ -637,7 +637,7 @@ h3 img {
     width: 80px;
     overflow: hidden;
     position: relative;
-    
+
     text-decoration: none;
 }
 #strip-prev-next a img {
@@ -661,7 +661,7 @@ h3 img {
     height: 40px;
     width: 60px;
     z-index: 10;
-    
+
     opacity: 0;
     font-weight: bold;
     text-transform: uppercase;
@@ -683,6 +683,15 @@ h3 img {
     opacity: 1;
 }
 
+#strip-jumps:after {
+    content: ".";
+    display: block;
+    clear: both;
+    height: 0;
+    margin: 0 0 2em 0;
+    overflow: hidden;
+}
+
 #strip-jumps li {
     display: block;
     float: left;
@@ -690,7 +699,7 @@ h3 img {
     width: 80px;
     height: 80px;
     position: relative;
-    
+
     list-style-type: none;
 }
 
@@ -725,7 +734,7 @@ h3 img {
     left: 10px;
     top: 30px;
     width: 60px;
-    
+
     font-family: "Chunk Five", "Clarendon BT", "Clarendon", serif;
     font-weight: bold;
     text-align: center;
@@ -735,6 +744,11 @@ h3 img {
 #strip-jumps a:hover b {
     text-decoration: underline;
     color: #CC004C;
+}
+
+#strip-link-to-this li {
+    margin: 0.3em 0 0.6em;
+    list-style-type: none;
 }
 
 .tws-month {
@@ -748,7 +762,7 @@ h3 img {
     height: 20px;
     margin: 0;
     padding: 60px 10px 0px;
-    
+
     color: #CC004C;
     font-family: "Museo Sans", sans-serif;
     text-transform: lowercase;
@@ -759,7 +773,7 @@ h3 img {
 
 #tws-2003-august,
 #tws-2004-june,
-#tws-2004-october, 
+#tws-2004-october,
 #tws-2005-november {
     clear: left;
 }
@@ -773,7 +787,7 @@ h3 img {
 #content .quiet a:visited {
     color: #888;
 }
-    
+
 #content .quiet a:hover,
 #content .quiet a:active {
     color: #CC004C;

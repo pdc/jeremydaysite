@@ -2,13 +2,13 @@
 {% load markup %}
 
 {% block links %}
-<link rel="alternate" type="application/atom+xml" href="{% url tws_reading_order_feed %}" 
+<link rel="alternate" type="application/atom+xml" href="{% url tws_reading_order_feed %}"
     title="The weekly Strip by Jeremy Dennis (in reading order)" />
-<link rel="alternate" type="application/rdf+xml" href="{% url tws_strip_rdf number=strip.number|stringformat:"d",format="xml" %}" 
+<link rel="alternate" type="application/rdf+xml" href="{% url tws_strip_rdf number=strip.number|stringformat:"d",format="xml" %}"
     title="{{ strip.title }} metadata (RDF/XML)" />
-<link rel="alternate" type="text/n3" href="{% url tws_strip_rdf number=strip.number|stringformat:"d",format="n3" %}" 
+<link rel="alternate" type="text/n3" href="{% url tws_strip_rdf number=strip.number|stringformat:"d",format="n3" %}"
     title="{{ strip.title }} metadata (N3)" />
-    
+
 <link rel="start" href="{% url tws_strip number=first.number|stringformat:"d" %}"
           title="{{ first.number }}. {{ first.title }} {{ first.date|date:"j N Y" }}" />
 {% if prev %}
@@ -71,9 +71,19 @@
       <div class="clear">&nbsp;</div>
     </div>
   </div>
-  
+
   <h2>Jump</h2>
   {% include "jeremyday/jumps.html" %}
-</div>
 
+  <div id="strip-link-to-this">
+    <h2>Link to this</h2>
+    <ul>
+      <li>
+        <a href="{{ twitter_share_url }}"
+            class="twitter-share-button" data-lang="en">Tweet</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      </li>
+    </ul>
+  </div>
+</div>
 {% endblock %}
