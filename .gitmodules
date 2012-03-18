@@ -1,0 +1,3 @@
+[submodule "submodules/spreadsite"]
+	path = submodules/spreadsite
+	url = git@github.com:pdc/spreadsite.git
