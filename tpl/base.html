@@ -6,7 +6,7 @@
     {% if is_css_naked %}
     <!-- No stylesheets on CSS Naked Day -->
     {% else %}
-    <link rel="stylesheet" type="text/css" href="{{ settings.STATIC_URL }}style/jeremyday.css" />
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}style/jeremyday.css" />
     {% endif %}
     {% block links %}{% endblock %}
     <meta name="author" content="Jeremy Day" />
@@ -28,7 +28,7 @@
       {% endblock %}
       <div class="clear"></div>
     </div>
-    
+
     {% block tabs %}
     <div id="tabs">
       <p class="accesibility">Site navigation:</p>
@@ -40,11 +40,11 @@
       </ul>
     </div>
     {% endblock %}
-      
+
     {% block poweredby %}{% endblock %}
-    
+
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ settings.STATIC_URL }}js/tab-overlay.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/tab-overlay.js"></script>
     {% block javascript %}{% endblock %}
   </body>
 </html>

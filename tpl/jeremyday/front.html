@@ -2,7 +2,7 @@
 {% load markup %}
 
 {% block title %}Jeremy Day{% endblock %}
-{% block heading %}<img src="{{ settings.STATIC_URL }}style/wordmark.png" alt="Jeremy Day (incorporating Jeremy Dennis)" />{% endblock %}
+{% block heading %}<img src="{{ STATIC_URL }}style/wordmark.png" alt="Jeremy Day (incorporating Jeremy Dennis)" />{% endblock %}
 
 {% block meta %}
     <meta name="google-site-verification" content="Vk6B9nZ6VAHxcY0QZpm7araP8DpjTY3cxIVk06alleQ" />
@@ -13,7 +13,7 @@
 {% block tab-home %}<li id="tab-home" class="active"><b>Home</b></li>{% endblock %}
 
 {% block javascript %}
-<script type="text/javascript" src="{{ settings.STATIC_URL }}js/front.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/front.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -21,27 +21,27 @@
 <div id="main" class="col">
   <div class="picture captioned left">
     <a href="http://www.flickr.com/photos/glasseye/2318407904/">
-      <img src="{{ settings.STATIC_URL }}style/by-matt-220w.jpg" alt="" width="220" height="330" align="right" />
+      <img src="{{ STATIC_URL }}style/by-matt-220w.jpg" alt="" width="220" height="330" align="right" />
       <small>Photo by Matt Brooker</small>
     </a>
   </div>
   {{ text|markdown }}
-  
+
   <p class="quiet">
-    On this page: <a href="#livejournal">LiveJournal</a>, 
-    <a href="#tws">The Weekly Strip</a>, 
+    On this page: <a href="#livejournal">LiveJournal</a>,
+    <a href="#tws">The Weekly Strip</a>,
     <a href="#appearances">Cleanskies on …</a>,
     <a href="#cleanskies">Twitter</a>, and
     <a href="#tabs">site navigation</a>
   </p>
-  
+
   {% if is_css_naked %}
   <h3>What happened to the design?</h3>
   <p>The style sheets for this page have been temporarily removed. Visit the
   <a href="http://naked.dustindiaz.com" title="Web Standards Naked Day Host Website">
   Annual CSS Naked Day</a> website for more information.</p>
   {% endif %}
-  
+
   <h2>LiveJournal LiveJournal</h2>
   <div id="livejournal"><a href="http://cleanskies.livejournal.com/">Click to see my LiveJournal</a></div>
 </div>
@@ -57,7 +57,7 @@
         <small>{{ strip.date|date:"d F Y" }}</small>
       </a>
     {% endfor %}
-  </ul>  
+  </ul>
 </div>
 
 <div id="appearances" class="col">
@@ -72,7 +72,7 @@
     </li>
     {% endfor %}
   </ul>
-  
+
   <h2>tweet tweet</h2>
   <ul id="cleanskies">
   </ul>

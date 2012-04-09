@@ -2,7 +2,7 @@
 {% load markup %}
 
 {% block title %}{% if keywords %}{{ keywords|join:", " }} –{% endif %} {{ library.title }}{% endblock %}
-{% block heading %}<img src="{{ settings.STATIC_URL }}style/projects.png" alt="Jeremy Day Projects" />{% endblock %}
+{% block heading %}<img src="{{ STATIC_URL }}style/projects.png" alt="Jeremy Day Projects" />{% endblock %}
 
 {% block tab-projects %}<li id="tab-projects" class="active"><b>Projects</b></li>{% endblock %}
 
@@ -58,7 +58,7 @@
     </li>
     {% endfor %}
   </ul>
-  
+
   <div class="pagination">
       <span class="step-links">
           {% if prev_href %}
