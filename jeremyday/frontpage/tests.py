@@ -20,7 +20,6 @@ class SimpleTest(TestCase):
 
 
     def test_entries(self):
-        print os.getcwd()
         with open('jeremyday/frontpage/lj-test.html', 'rb') as input:
             html = input.read()
 
