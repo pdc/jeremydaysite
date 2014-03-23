@@ -51,7 +51,7 @@
   <ul>
     {% for strip in tws %}
     <li>
-      <a href="{% url tws_strip number=strip.number|stringformat:"d" %}">
+      <a href="{% url 'tws_strip' number=strip.number|stringformat:"d" %}">
         <img src="{{ strip.icon_src }}" alt="" width="80" height="80" />
         <b>{{ strip.number }}. {{ strip.title }}</b>
         <small>{{ strip.date|date:"d F Y" }}</small>

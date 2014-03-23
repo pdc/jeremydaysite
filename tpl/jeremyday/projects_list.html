@@ -22,9 +22,9 @@
         <li>
           {{ drillup.keyword }}
           {% if drillup.urlencoded %}
-          <a href="{% url library_detail library_name=library.name,urlencoded_keywords=drillup.urlencoded %}">x</a>
+          <a href="{% url 'library_detail' library_name=library.name urlencoded_keywords=drillup.urlencoded %}">x</a>
           {% else %}
-          <a href="{% url library_detail library_name=library.name %}">x</a>
+          <a href="{% url 'library_detail' library_name=library.name %}">x</a>
           {% endif %}
         </li>
         {% endfor %}
@@ -35,7 +35,7 @@
       <ul id="drilldown">
         {% for drilldown in facet.drilldowns %}
         <li>
-          <a href="{% url library_detail library_name=library.name,urlencoded_keywords=drilldown.urlencoded %}">{{ drilldown.keyword }} <small>({{ drilldown.link_count }})</small></a>
+          <a href="{% url 'library_detail' library_name=library.name urlencoded_keywords=drilldown.urlencoded %}">{{ drilldown.keyword }} <small>({{ drilldown.link_count }})</small></a>
         </li>
         {% endfor %}
       </ul>
