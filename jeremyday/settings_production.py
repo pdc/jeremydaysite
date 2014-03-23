@@ -3,8 +3,8 @@
 import os, sys
 
 root_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-def local_file(file_name):
-    return os.path.join(root_dir, file_name)
+def local_file(file_name, *args):
+    return os.path.join(root_dir, file_name, *args)
 
 submodules_dir = local_file('submodules')
 if submodules_dir not in sys.path:
