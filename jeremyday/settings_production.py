@@ -11,6 +11,12 @@ if submodules_dir not in sys.path:
     sys.path.append(submodules_dir)
 
 
+for w in ['spreadsite']:
+    dir_path = local_file('submodules', w)
+    if dir_path not in sys.path:
+        sys.path.append(dir_path)
+
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
