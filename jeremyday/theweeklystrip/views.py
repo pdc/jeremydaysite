@@ -12,7 +12,7 @@ from jeremyday import twslib
 from datetime import datetime, date
 import time
 
-def render_with_template(default_template_name, default_base_template_name='base.html', mimetype='text/html'):
+def render_with_template(default_template_name, default_base_template_name='base.html', content_type='text/html'):
     """Decorator to wrap template-based rendering around a view function returning template variables."""
     def decorator(func):
         def wrapped_handler(request, template_name=None, base_template_name=None, *args, **kwargs):
@@ -21,7 +21,7 @@ def render_with_template(default_template_name, default_base_template_name='base
                 return result
             if not result.get('base_template_name'):
                 result['base_template_name'] = base_template_name or default_base_template_name
-            return render_to_response(template_name or default_template_name, result, RequestContext(request), mimetype=mimetype)
+            return render_to_response(template_name or default_template_name, result, RequestContext(request), content_type=mimetype)
         return wrapped_handler
     return decorator
 
@@ -160,7 +160,7 @@ def by_date(request, year, month, day):
     raise Http404
 
 
-@render_with_template('jeremyday/tws.atom', mimetype='application/atom+xml')
+@render_with_template('jeremyday/tws.atom', content_type='application/atom+xml')
 def reading_order_feed(request, page=None):
     """Returns a feed in reading order, as a 'paged feed' (see RFC 5005 for what this means).
 

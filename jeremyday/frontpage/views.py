@@ -86,5 +86,5 @@ def livejournal(request):
         'success': True,
         'body': html,
     }
-    response = HttpResponse(json.dumps(result, 'UTF-8'), mimetype='text/javascript')
+    response = HttpResponse(json.dumps(result, 'UTF-8'), content_type='text/javascript')
     return response

@@ -76,7 +76,7 @@ def strip_rdf(request, number, format):
         graph.add((strip_subject, ALLEGED['next-page'], TWS['strip%d' % (ordinal + 1)]))
 
     response = HttpResponse(graph.serialize(format=format),
-        mimetype=format_mimetypes[format])
+        content_type=format_mimetypes[format])
     return response
 
 
