@@ -15,7 +15,8 @@ def update_requirements():
 
 def test():
     with settings(warn_only=True):
-        result = local('./manage.py test {0}'.format(' '.join(env.django_apps)), capture=True)
+        ##result = local('./manage.py test {0}'.format(' '.join(env.django_apps)), capture=True)
+        result = local('./manage.py test')
     if result.failed and not confirm("Tests failed. Continue anyway?"):
         abort("Aborting at user request.")
 

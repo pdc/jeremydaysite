@@ -37,7 +37,7 @@ def strip_conneg(request, number):
     view_name, kwargs = options[best_media]
     return HttpResponseRedirect(reverse(view_name, kwargs=kwargs))
 
-format_mimetypes = {
+format_content_types = {
     'xml': 'application/rdf+xml',
     'n3': 'text/n3',
 }
@@ -76,7 +76,7 @@ def strip_rdf(request, number, format):
         graph.add((strip_subject, ALLEGED['next-page'], TWS['strip%d' % (ordinal + 1)]))
 
     response = HttpResponse(graph.serialize(format=format),
-        content_type=format_mimetypes[format])
+        content_type=format_content_types[format])
     return response
 
 

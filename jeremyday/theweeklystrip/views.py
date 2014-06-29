@@ -21,7 +21,7 @@ def render_with_template(default_template_name, default_base_template_name='base
                 return result
             if not result.get('base_template_name'):
                 result['base_template_name'] = base_template_name or default_base_template_name
-            return render_to_response(template_name or default_template_name, result, RequestContext(request), content_type=mimetype)
+            return render_to_response(template_name or default_template_name, result, RequestContext(request), content_type=content_type)
         return wrapped_handler
     return decorator
 
