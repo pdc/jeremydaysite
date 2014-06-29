@@ -28,6 +28,7 @@ MANAGERS = ADMINS
 
 ALLOWED_HOSTS = [
     'jeremyday.org.uk',
+    'jeremyday.uk',
 ]
 
 DATABASES = {
@@ -81,7 +82,7 @@ STATICFILES_DIRS = (
 STATIC_ROOT = '/home/jeremyday/static'
 
 # Where static files are served from:
-STATIC_URL = 'http://static.jeremyday.org.uk/'
+STATIC_URL = 'http://static.jeremyday.uk/'
 
 FRONTPAGE_DIR = local_file('content')
 LIVEJOURNAL_URL = 'http://cleanskies.livejournal.com/'
@@ -123,7 +124,6 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
-    'django.contrib.markup',
     'django.contrib.staticfiles',
 
     'spreadsite.spreadlinks',

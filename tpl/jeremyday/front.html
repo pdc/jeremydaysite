@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load markup %}
 
 {% block title %}Jeremy Day{% endblock %}
 {% block heading %}<img src="{{ STATIC_URL }}style/wordmark.png" alt="Jeremy Day (incorporating Jeremy Dennis)" />{% endblock %}
@@ -25,7 +24,7 @@
       <small>Photo by Matt Brooker</small>
     </a>
   </div>
-  {{ text|markdown }}
+  {{ text_formatted }}
 
   <p class="quiet">
     On this page: <a href="#livejournal">LiveJournal</a>,

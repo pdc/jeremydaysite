@@ -1,6 +1,6 @@
 BeautifulSoup==3.2.1
-Django==1.5.5
-Markdown==2.4
+Django==1.6.5
+Markdown==2.4.1
 SPARQLWrapper==1.5.2
 html5lib==0.999
 httplib2==0.8

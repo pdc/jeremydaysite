@@ -1,5 +1,11 @@
-from django.conf.urls.defaults import *
+# -*- coding: utf-8 -*-
+
+from __future__ import unicode_literals
+from django.conf.urls import url, include
 from django.conf import settings
+import spreadlinks.views
+import jeremyday.frontpage.views
+
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -10,17 +16,17 @@ spreadlinks_args = {
     'template_name': 'jeremyday/projects_list.html',
 }
 
+urlpatterns = [
+    url(r'^(?P<library_name>projects)/$', spreadlinks.views.library_detail, spreadlinks_args, 'library_detail'),
+    url(r'^(?P<library_name>projects)/page(?P<page>[0-9]+)$', spreadlinks.views.library_detail, spreadlinks_args, 'library_detail'),
+    url(r'^(?P<library_name>projects)/tags/(?P<urlencoded_keywords>[a-z_0-9+:-]+)$', spreadlinks.views.library_detail, spreadlinks_args, 'library_detail'),
+    url(r'^(?P<library_name>projects)/tags/(?P<urlencoded_keywords>[a-z_0-9+:-]+)/page(?P<page>[0-9]+)$', spreadlinks.views.library_detail, spreadlinks_args, 'library_detail'),
 
-urlpatterns = patterns('spreadlinks.views',
-    (r'^(?P<library_name>projects)/$', 'library_detail', spreadlinks_args, 'library_detail'),
-    (r'^(?P<library_name>projects)/page(?P<page>[0-9]+)$', 'library_detail', spreadlinks_args, 'library_detail'),
-    (r'^(?P<library_name>projects)/tags/(?P<urlencoded_keywords>[a-z_0-9+:-]+)$', 'library_detail', spreadlinks_args, 'library_detail'),
-    (r'^(?P<library_name>projects)/tags/(?P<urlencoded_keywords>[a-z_0-9+:-]+)/page(?P<page>[0-9]+)$', 'library_detail', spreadlinks_args, 'library_detail'),
-) + patterns('jeremyday.frontpage.views',
-    (r'^$', 'front_page', {}, 'front_page'),
-    (r'^livejournal$', 'livejournal', {}, 'livejournal'),
-) + patterns('',
-    (r'^tws/', include('jeremyday.theweeklystrip.urls')),
+    url(r'^$', jeremyday.frontpage.views.front_page, {}, 'front_page'),
+    url(r'^livejournal$', jeremyday.frontpage.views.livejournal, {}, 'livejournal'),
+
+    url(r'^tws/', include('jeremyday.theweeklystrip.urls')),
+
     # Example:
     # (r'^jeremyday/', include('jeremyday.foo.urls')),
 
@@ -32,4 +38,4 @@ urlpatterns = patterns('spreadlinks.views',
 
     # Uncomment the next line to enable the admin:
     # (r'^admin/', include(admin.site.urls)),
-)
+]

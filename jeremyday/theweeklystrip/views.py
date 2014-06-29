@@ -207,10 +207,13 @@ def reading_order_feed(request, page=None):
         strip['icon_src'] = request.build_absolute_uri(strip['icon_src'])
         strip['image_src'] = request.build_absolute_uri(strip['image_src'])
         strip['page_href'] = request.build_absolute_uri(reverse('tws_strip', kwargs={'number': str(strip['number'])}))
-        strip['id'] = 'tag:jeremyday.org.uk,2010:tws-strip:%d' % strip['number']
-        updated = time.strftime('%Y-%m-%dT%H:%M:%S%z',time.localtime(strip['mtime']))
+        updated = time.strftime('%Y-%m-%dT%H:%M:%S%z', time.localtime(strip['mtime']))
         updated = '%s:%s' % (updated[:-2], updated[-2:]) # RFC 3339 required +00:00 not +0000
         strip['updated'] = updated
+        if updated > '2014-06-21':
+            strip['id'] = 'tag:jeremyday.uk,2014:tws-strip:%d' % strip['number']
+        else:
+            strip['id'] = 'tag:jeremyday.org.uk,2010:tws-strip:%d' % strip['number']
 
         if updated > feed_updated: # This is the first time I have actually exploited the sortability of RFC 3339 datetimes!
             feed_updated = updated

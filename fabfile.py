@@ -11,7 +11,7 @@ env.settings_subdir = env.site_name
 env.django_apps = ['theweeklystrip', 'spreadlinks', 'frontpage']
 
 def update_requirements():
-    local("pip freeze | egrep -v 'Fabric|pycrypto|ssh' > requirements.txt")
+    local("pip freeze | egrep -v 'Fabric|pycrypto|ssh|ecdsa|paramiko' > requirements.txt")
 
 def test():
     with settings(warn_only=True):

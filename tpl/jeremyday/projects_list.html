@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load markup %}
 
 {% block title %}{% if keywords %}{{ keywords|join:", " }} –{% endif %} {{ library.title }}{% endblock %}
 {% block heading %}<img src="{{ STATIC_URL }}style/projects.png" alt="Jeremy Day Projects" />{% endblock %}
@@ -8,7 +7,7 @@
 
 {% block content %}
 <div id="description">
-  {{ library.description|markdown }}
+  {{ library.description_formatted }}
 </div>
 
 <div id="keywords">
@@ -53,7 +52,7 @@
     <li>
       <a href="{{ link.href }}">
         <h3>{% if link.image_url %}<img src="{{ link.image_url }}" alt="" />{% endif %}{{ link.title }}</h3>
-        {% if link.description %}{{ link.description|markdown }}{% endif %}
+        {% if link.description %}{{ link.description_formatted }}{% endif %}
       </a>
     </li>
     {% endfor %}

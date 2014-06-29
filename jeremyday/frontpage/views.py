@@ -1,19 +1,25 @@
 # Create your views here.
 
-from django.http import HttpResponse, Http404
-from django.template import RequestContext, loader, Context
-from django.shortcuts import render_to_response
-from django.core.urlresolvers import reverse
-from django.core.cache import cache
-from django.views.decorators.cache import cache_page
-from django.conf import settings
 import os
 import codecs
 import httplib2
 import json
 from xml.etree import ElementTree as ET
+from django.utils import safestring
+from django.core.urlresolvers import reverse
+from django.core.cache import cache
+from django.http import HttpResponse, Http404
+from django.template import RequestContext, loader, Context
+from django.shortcuts import render_to_response
+from django.views.decorators.cache import cache_page
+from django.conf import settings
+from markdown import Markdown
 from jeremyday import twslib
 from jeremyday.livejournal import entries_from_livejournal_url
+
+
+formatter = Markdown()
+
 
 def render_with_template(default_template_name, default_base_template_name='base.html'):
     """Decorator to wrap template-based rendering around a view function returning template variables."""
@@ -37,6 +43,7 @@ def front_page(request):
     other_sites = twslib.get_sites(os.path.join(settings.FRONTPAGE_DIR, 'other-sites.data'))
     return {
         'text': text,
+        'text_formatted': safestring.mark_safe(formatter.convert(text)),
         'tws': reversed(tws[-12:]),
         'other_sites': other_sites,
     }
@@ -55,7 +62,7 @@ def livejournal(request):
             if not body:
                 url = 'http://cleanskies.livejournal.com/data/atom'
                 http = httplib2.Http(settings.HTTPLIB2_CACHE_DIR)
-                livejournal_response, body = http.request(url, 'GET', headers={'User-Agent': 'jeremyday.org.uk/1.0 (pdc@alleged.org.uk)'})
+                livejournal_response, body = http.request(url, 'GET', headers={'User-Agent': 'jeremyday.uk/1.0 (pdc@alleged.org.uk)'})
                 cache.set(LIVEJOURNAL_ATOM_CACHE_KEY, body)
             feed_elt = ET.XML(body)
             for entry_elt in feed_elt:

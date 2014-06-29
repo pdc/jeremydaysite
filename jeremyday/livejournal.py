@@ -18,7 +18,7 @@ def entries_from_livejournal_url(url):
     html_key = 'livejournal-%s' % url
     html = cache.get(html_key)
     if html is None:
-        response, html = get_http().request(url, headers={'user-agent': 'jeremyday.org.uk/1.0 (like Godzilla; pdc@alleged.org.uk)'})
+        response, html = get_http().request(url, headers={'user-agent': 'jeremyday.uk/1.0 (like Godzilla; pdc@alleged.org.uk)'})
         cache.set(html_key, html)
 
     entries = entries_from_livejournal_html(html)

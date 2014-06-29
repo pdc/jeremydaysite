@@ -36,7 +36,7 @@ def strip_conneg(request, number):
                     break
     view_name, kwargs = options[best_media]
     return HttpResponseRedirect(reverse(view_name, kwargs=kwargs))
-    
+
 format_mimetypes = {
     'xml': 'application/rdf+xml',
     'n3': 'text/n3',
@@ -48,36 +48,35 @@ def strip_rdf(request, number, format):
     strips = twslib.get_tws(settings.TWS_FILE, settings.TWS_SRC_PREFIX);
     if ordinal > len(strips):
         raise Http404
-        
+
     # Strips are organized by date, not number.
     # So we need to work out which strips has this number.
     indexes_by_number = dict((strip['number'], i) for (i, strip) in enumerate(strips))
     index = indexes_by_number[ordinal]
     strip = strips[index]
-    
+
     graph = ConjunctiveGraph()
     graph.bind('alleged', ALLEGED)
     graph.bind('dc', DC)
     graph.bind('foaf', FOAF)
     graph.bind('tws', TWS)
-    
+
     strip_subject = TWS[number]
     graph.add((strip_subject, RDF.type, ALLEGED['comic']))
     graph.add((strip_subject, DC['creator'], Literal('Jeremy Day')))
     graph.add((strip_subject, DC['title'], Literal(strip['title'])))
     graph.add((strip_subject, DC['date'], Literal(strip['date'])))
-    
+
     graph.add((strip_subject, ALLEGED['excerpt'], URIRef(strip['icon_src'])))
     graph.add((strip_subject, ALLEGED['image'], URIRef(strip['image_src'])))
-    
+
     if ordinal > 1:
         graph.add((strip_subject, ALLEGED['prev-page'], TWS['strip%d' % (ordinal - 1)]))
     if ordinal < len(strips):
         graph.add((strip_subject, ALLEGED['next-page'], TWS['strip%d' % (ordinal + 1)]))
-    
+
     response = HttpResponse(graph.serialize(format=format),
         mimetype=format_mimetypes[format])
     return response
-    
-    
-    
+
+
