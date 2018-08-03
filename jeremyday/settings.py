@@ -1,23 +1,32 @@
 # Django settings for jeremyday project.
 
-import os, sys
+import sys
 
-root_dir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-def local_file(file_name, *args):
-    return os.path.join(root_dir, file_name, *args)
+import environ
 
-submodules_dir = local_file('submodules')
+env = environ.Env(
+    DEBUG=(bool, False),
+    STATIC_ROOT=(str, None),
+    STATIC_URL=(str, None),
+    SECRET_KEY=str,
+    HTTPLIB2_CACHE_DIR=(str, '/var/tmp/jeremydaysite-httplib2-cache'),
+)
+environ.Env.read_env()
+expand_path = environ.Path(__file__) - 2
+
+
+submodules_dir = expand_path('submodules')
 if submodules_dir not in sys.path:
     sys.path.append(submodules_dir)
 
 
 for w in ['spreadsite']:
-    dir_path = local_file('submodules', w)
+    dir_path = expand_path('submodules', w)
     if dir_path not in sys.path:
         sys.path.append(dir_path)
 
 
-DEBUG = True
+DEBUG = env('DEBUG')
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -72,31 +81,34 @@ MEDIA_ROOT = ''
 MEDIA_URL = ''
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'w1oim%8yfl75mey03=m&^mmnk+$a^ddrlo%*wy^b0@10)in5#&'
+SECRET_KEY = 'secret-key-value' if DEBUG else env('SECRET_KEY')
 
 STATICFILES_DIRS = (
-    local_file('static'),
+    expand_path('static'),
 )
 
-# Where static files are collected:
-STATIC_ROOT = '/home/jeremyday/static'
+if env('STATIC_ROOT'):
+    STATIC_URL = env('STATIC_URL', default='//static.jeremyday.uk/')
+    STATIC_ROOT = env('STATIC_ROOT')  # e.g., '/home/alleged/static')
+    if not DEBUG:
+        STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+else:
+    STATIC_URL = '/STATIC/'
 
-# Where static files are served from:
-STATIC_URL = 'http://static.jeremyday.uk/'
-
-FRONTPAGE_DIR = local_file('content')
+FRONTPAGE_DIR = expand_path('content')
 LIVEJOURNAL_URL = 'http://cleanskies.livejournal.com/'
 LIVEJOURNAL_ATOM_URL = 'http://cleanskies.livejournal.com/data/atom'
-HTTPLIB2_CACHE_DIR = '/home/jeremyday/caches/httplib2'
-TWS_FILE = local_file('content/tws.data')
+HTTPLIB2_CACHE_DIR = env('HTTPLIB2_CACHE_DIR')
+TWS_FILE = expand_path('content/tws.data')
 TWS_SRC_PREFIX = STATIC_URL
-TWS_IMAGE_DIR = local_file('static')
+TWS_IMAGE_DIR = expand_path('static')
 TWS_FEED_PER_PAGE = 20
 
-SPREADLINKS_DIR = local_file('linklibraries')
+SPREADLINKS_DIR = expand_path('linklibraries')
 SPREADLINKS_PER_PAGE = 20
 
 TEMPLATE_CONTEXT_PROCESSORS = [
+    #"django.core.context_processors.auth",
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
@@ -104,6 +116,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
+    "jeremyday.context_processors.settings",
     "jeremyday.context_processors.is_css_naked",
 ]
 
@@ -116,7 +129,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'jeremyday.urls'
 
 TEMPLATE_DIRS = (
-    local_file('tpl'),
+    expand_path('tpl'),
 )
 
 INSTALLED_APPS = (

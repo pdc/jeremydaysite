@@ -3,3 +3,4 @@ dev.db
 *.lineform/
 settings.py
 build
+.env
