@@ -12,13 +12,6 @@ from jeremyday.livejournal import *
 from jeremyday.context_processors import *
 
 class SimpleTest(TestCase):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        self.failUnlessEqual(1 + 1, 2)
-
-
     def test_entries(self):
         with open('jeremyday/frontpage/lj-test.html', 'rb') as input:
             html = input.read()

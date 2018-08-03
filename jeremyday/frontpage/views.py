@@ -5,15 +5,16 @@ import codecs
 import httplib2
 import json
 from xml.etree import ElementTree as ET
-from django.utils import safestring
-from django.core.urlresolvers import reverse
+from django.conf import settings
 from django.core.cache import cache
 from django.http import HttpResponse, Http404
-from django.template import RequestContext, loader, Context
 from django.shortcuts import render_to_response
+from django.template import RequestContext, loader, Context
+from django.urls import reverse
+from django.utils import safestring
 from django.views.decorators.cache import cache_page
-from django.conf import settings
 from markdown import Markdown
+
 from jeremyday import twslib
 from jeremyday.livejournal import entries_from_livejournal_url
 

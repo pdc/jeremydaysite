@@ -15,19 +15,8 @@ environ.Env.read_env()
 expand_path = environ.Path(__file__) - 2
 
 
-submodules_dir = expand_path('submodules')
-if submodules_dir not in sys.path:
-    sys.path.append(submodules_dir)
-
-
-for w in ['spreadsite']:
-    dir_path = expand_path('submodules', w)
-    if dir_path not in sys.path:
-        sys.path.append(dir_path)
-
-
 DEBUG = env('DEBUG')
-TEMPLATE_DEBUG = DEBUG
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
@@ -36,6 +25,7 @@ ADMINS = (
 MANAGERS = ADMINS
 
 ALLOWED_HOSTS = [
+    'localhost',
     'jeremyday.org.uk',
     'jeremyday.uk',
 ]
@@ -107,30 +97,38 @@ TWS_FEED_PER_PAGE = 20
 SPREADLINKS_DIR = expand_path('linklibraries')
 SPREADLINKS_PER_PAGE = 20
 
-TEMPLATE_CONTEXT_PROCESSORS = [
-    #"django.core.context_processors.auth",
-    "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.static",
-    "django.core.context_processors.tz",
-    "django.contrib.messages.context_processors.messages",
-    "jeremyday.context_processors.settings",
-    "jeremyday.context_processors.is_css_naked",
-]
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware'
 )
 
 ROOT_URLCONF = 'jeremyday.urls'
 
-TEMPLATE_DIRS = (
-    expand_path('tpl'),
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            expand_path('tpl'),
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+                "jeremyday.context_processors.settings",
+                "jeremyday.context_processors.is_css_naked",
+            ]
+        },
+    },
+]
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -139,7 +137,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.staticfiles',
 
-    'spreadsite.spreadlinks',
+    'spreadlinks',
     'jeremyday.theweeklystrip',
     'jeremyday.frontpage',
 )

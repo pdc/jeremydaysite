@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
-from django.conf.urls import url, include
+from django.conf.urls import include, url
 from django.conf import settings
 import spreadlinks.views
 import jeremyday.frontpage.views
+import jeremyday.theweeklystrip.urls
 
 
 # Uncomment the next two lines to enable the admin:
@@ -13,29 +14,34 @@ import jeremyday.frontpage.views
 
 spreadlinks_args = {
     'root_dir': settings.SPREADLINKS_DIR,
+    'library_name': 'projects',
     'template_name': 'jeremyday/projects_list.html',
 }
 
-urlpatterns = [
-    url(r'^(?P<library_name>projects)/$', spreadlinks.views.library_detail, spreadlinks_args, 'library_detail'),
-    url(r'^(?P<library_name>projects)/page(?P<page>[0-9]+)$', spreadlinks.views.library_detail, spreadlinks_args, 'library_detail'),
-    url(r'^(?P<library_name>projects)/tags/(?P<urlencoded_keywords>[a-z_0-9+:-]+)$', spreadlinks.views.library_detail, spreadlinks_args, 'library_detail'),
-    url(r'^(?P<library_name>projects)/tags/(?P<urlencoded_keywords>[a-z_0-9+:-]+)/page(?P<page>[0-9]+)$', spreadlinks.views.library_detail, spreadlinks_args, 'library_detail'),
-
-    url(r'^$', jeremyday.frontpage.views.front_page, {}, 'front_page'),
-    url(r'^livejournal$', jeremyday.frontpage.views.livejournal, {}, 'livejournal'),
-
-    url(r'^tws/', include('jeremyday.theweeklystrip.urls')),
-
-    # Example:
-    # (r'^jeremyday/', include('jeremyday.foo.urls')),
-
-    #(r'^$', 'library_list', spreadlinks_args, 'library_list'),
-
-    # Uncomment the admin/doc line below and add 'django.contrib.admindocs'
-    # to INSTALLED_APPS to enable admin documentation:
-    # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # (r'^admin/', include(admin.site.urls)),
+spreadlinks_patterns = [
+    url(x, spreadlinks.views.library_detail, spreadlinks_args, name='library_detail')
+    for x in [r'^$', r'^page(?P<page>\d+)$']
 ]
+
+urlpatterns = [
+    url(r'^projects/', include(
+        spreadlinks_patterns + [
+        url(r'^tags/(?P<urlencoded_keywords>[a-z_0-9+:-]+)', include(spreadlinks_patterns)),
+    ])),
+
+    url(r'^$', jeremyday.frontpage.views.front_page, name='front_page'),
+    url(r'^livejournal$', jeremyday.frontpage.views.livejournal, name='livejournal'),
+    url(r'^tws/', include(jeremyday.theweeklystrip.urls.urlpatterns)),
+]
+
+# urlpatterns = [
+#     url(r'^(?P<library_name>projects)/$', spreadlinks.views.library_detail, spreadlinks_args, 'library_detail'),
+#     url(r'^(?P<library_name>projects)/page(?P<page>[0-9]+)$', spreadlinks.views.library_detail, spreadlinks_args, 'library_detail'),
+#     url(r'^(?P<library_name>projects)/tags/(?P<urlencoded_keywords>[a-z_0-9+:-]+)$', spreadlinks.views.library_detail, spreadlinks_args, 'library_detail'),
+#     url(r'^(?P<library_name>projects)/tags/(?P<urlencoded_keywords>[a-z_0-9+:-]+)/page(?P<page>[0-9]+)$', spreadlinks.views.library_detail, spreadlinks_args, 'library_detail'),
+
+#     url(r'^$', jeremyday.frontpage.views.front_page, {}, 'front_page'),
+#     url(r'^livejournal$', jeremyday.frontpage.views.livejournal, {}, 'livejournal'),
+
+#     url(r'^tws/', include(jeremyday.theweeklystrip.urls.url_patterns)),
+# ]

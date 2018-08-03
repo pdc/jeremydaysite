@@ -1,16 +1,17 @@
 # Encoding: UTF-8
 
-from urllib import urlencode
-from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.template import RequestContext
-from django.shortcuts import render_to_response
-from django.core.urlresolvers import reverse
-from django.core.cache import cache
-from django.views.decorators.cache import cache_page
-from django.conf import settings
-from jeremyday import twslib
 from datetime import datetime, date
+from urllib import urlencode
 import time
+from django.conf import settings
+from django.core.cache import cache
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.shortcuts import render
+from django.template import RequestContext
+from django.urls import reverse
+from django.views.decorators.cache import cache_page
+
+from jeremyday import twslib
 
 def render_with_template(default_template_name, default_base_template_name='base.html', content_type='text/html'):
     """Decorator to wrap template-based rendering around a view function returning template variables."""
@@ -21,7 +22,7 @@ def render_with_template(default_template_name, default_base_template_name='base
                 return result
             if not result.get('base_template_name'):
                 result['base_template_name'] = base_template_name or default_base_template_name
-            return render_to_response(template_name or default_template_name, result, RequestContext(request), content_type=content_type)
+            return render(request, template_name or default_template_name, result, content_type=content_type)
         return wrapped_handler
     return decorator
 
