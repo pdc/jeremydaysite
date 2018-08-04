@@ -19,8 +19,8 @@ from django.core.cache import cache
 
 def word_iter(s):
     """Split line in to words in a fashion like shlex.split, but simpler."""
-    quote = None # Quote character being matched, or None
-    beg = None # First char of word being scanned, or None
+    quote = None  # Quote character being matched, or None
+    beg = None  # First char of word being scanned, or None
     for pos, c in enumerate(s):
         if quote and c == quote:
             # end of quoted string
@@ -47,29 +47,33 @@ def word_iter(s):
     if beg:
         yield s[beg:]
 
+
 def tws_iter(in_file, prefix):
     """Load the list of strips from tws.data."""
-    input = codecs.open(in_file, 'r', 'utf-8')
-    count = 0
-    for line in input:
-        line = line.strip()
-        if line:
-            count += 1
-            xs = list(word_iter(line))
-            d = dict(zip(['image_src', 'icon_src', 'title', 'lj'], xs))
-            s = d['image_src'].replace('-', '')[:8]
-            d['page_href'] = '%s/%s.html' % (s[:4], s)
-            date = datetime.date(int(s[:4]), int(s[4:6], 10), int(s[6:8], 10))
-            d['date'] = date
-            d['number'] = count
-            d['image_src_sans_prefix'] = '%s/%s' % (s[:4], d['image_src'])
-            d['image_src'] = '%s%s/%s' % (prefix, s[:4], d['image_src'])
-            d['icon_src'] = '%s%s/%s' % (prefix, s[:4], d['icon_src'])
-            yield d
+    with open(in_file, 'r', encoding='UTF-8') as input:
+        count = 0
+        for line in input:
+            line = line.strip()
+            if line:
+                count += 1
+                xs = list(word_iter(line))
+                d = dict(zip(['image_src', 'icon_src', 'title', 'lj'], xs))
+                s = d['image_src'].replace('-', '')[:8]
+                d['page_href'] = '%s/%s.html' % (s[:4], s)
+                date = datetime.date(int(s[:4]), int(s[4:6], 10), int(s[6:8], 10))
+                d['date'] = date
+                d['number'] = count
+                d['image_src_sans_prefix'] = '%s/%s' % (s[:4], d['image_src'])
+                d['image_src'] = '%s%s/%s' % (prefix, s[:4], d['image_src'])
+                d['icon_src'] = '%s%s/%s' % (prefix, s[:4], d['icon_src'])
+                yield d
     print('Read', count, 'entries from', in_file)
+
 
 TWS_CACHE_KEY = 'tws-data'
 TWS_WHEN_CACHE_KEY = 'tws-data-when'
+
+
 def get_tws(in_file, prefix):
     result = None
     when_cached = cache.get(TWS_WHEN_CACHE_KEY)
@@ -84,6 +88,7 @@ def get_tws(in_file, prefix):
         cache.set(TWS_WHEN_CACHE_KEY, time.time())
     return result
 
+
 def add_mtimes(strips, image_dir):
     for strip in strips:
         if 'mtime' not in strip:
@@ -92,22 +97,26 @@ def add_mtimes(strips, image_dir):
             strip['mtime'] = mtime
     return strips
 
+
 def sites_iter(in_file):
     """Load the list of other web sites."""
-    input = codecs.open(in_file, 'r', 'utf-8')
-    count = 0
-    for line in input:
-        line = line.strip()
-        if line:
-            count += 1
-            xs = list(word_iter(line))
-            if xs:
-                d = dict(zip(['href', 'title', 'icon_src'], xs))
-                d['number'] = count
-                yield d
+    with open(in_file, 'r', encoding='UTF-8') as input:
+        count = 0
+        for line in input:
+            line = line.strip()
+            if line:
+                count += 1
+                xs = list(word_iter(line))
+                if xs:
+                    d = dict(zip(['href', 'title', 'icon_src'], xs))
+                    d['number'] = count
+                    yield d
     print('Read', count, 'entries from', in_file)
 
+
 cached_sites = None
+
+
 def get_sites(in_file):
     global cached_sites
     if cached_sites is None:
@@ -115,12 +124,14 @@ def get_sites(in_file):
         # cached_sites.sort(key=lambda d: d['date'])
     return cached_sites
 
+
 def make_index(template_name='index.html', template_paths=['templates'], out_dir='out', out_name='index.html', is_verbose=True):
     loader = TemplateLoader(template_paths)
     print('Default_encoding:', loader.default_encoding)
     template = loader.load(template_name)
 
-    content_markdown = codecs.open('index-content.markdown', 'r', 'utf-8').read()
+    with open('index-content.markdown', 'r', encoding='UTF-8') as input:
+        content_markdown = input.read()
     content_html = markdown.markdown(content_markdown)
     tws = get_tws()
     sites = get_sites()
@@ -131,15 +142,14 @@ def make_index(template_name='index.html', template_paths=['templates'], out_dir
     if is_verbose: print('Wrote HTML to', out_name)
 
 
-
 help_message = '''
 The help message goes here.
 '''
 
 
 class Usage(Exception):
-  def __init__(self, msg):
-    self.msg = msg
+    def __init__(self, msg):
+        self.msg = msg
 
 
 def main(argv=None):
