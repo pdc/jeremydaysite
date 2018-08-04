@@ -86,8 +86,8 @@ else:
     STATIC_URL = '/STATIC/'
 
 FRONTPAGE_DIR = expand_path('content')
-LIVEJOURNAL_URL = 'http://cleanskies.livejournal.com/'
-LIVEJOURNAL_ATOM_URL = 'http://cleanskies.livejournal.com/data/atom'
+LIVEJOURNAL_URL = 'https://cleanskies.livejournal.com/'
+LIVEJOURNAL_ATOM_URL = 'https://cleanskies.livejournal.com/data/atom'
 HTTPLIB2_CACHE_DIR = env('HTTPLIB2_CACHE_DIR')
 TWS_FILE = expand_path('content/tws.data')
 TWS_SRC_PREFIX = STATIC_URL
