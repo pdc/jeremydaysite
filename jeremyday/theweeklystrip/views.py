@@ -1,7 +1,7 @@
 # Encoding: UTF-8
 
 from datetime import datetime, date
-from urllib import urlencode
+from urllib.parse import urlencode
 import time
 from django.conf import settings
 from django.core.cache import cache
@@ -58,7 +58,7 @@ def all_about_the_nth_strip(request, strips, index):
     twitter_share_params = [
         ('url', request.build_absolute_uri(reverse('tws_strip',kwargs={'number': '%d' % strip['number']}))),
         ('via', 'cleanskies'),
-        ('text', u'Jeremy Day’s The Weekly Strip {0} ‘{1}’'
+        ('text', 'Jeremy Day’s The Weekly Strip {0} ‘{1}’'
             .format(strip['number'], strip['title'])
             .encode('UTF-8')),
         ('lang', 'en'),

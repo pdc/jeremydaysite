@@ -66,7 +66,7 @@ def tws_iter(in_file, prefix):
             d['image_src'] = '%s%s/%s' % (prefix, s[:4], d['image_src'])
             d['icon_src'] = '%s%s/%s' % (prefix, s[:4], d['icon_src'])
             yield d
-    print 'Read', count, 'entries from', in_file
+    print('Read', count, 'entries from', in_file)
 
 TWS_CACHE_KEY = 'tws-data'
 TWS_WHEN_CACHE_KEY = 'tws-data-when'
@@ -83,7 +83,7 @@ def get_tws(in_file, prefix):
         cache.set(TWS_CACHE_KEY, result)
         cache.set(TWS_WHEN_CACHE_KEY, time.time())
     return result
-    
+
 def add_mtimes(strips, image_dir):
     for strip in strips:
         if 'mtime' not in strip:
@@ -91,7 +91,7 @@ def add_mtimes(strips, image_dir):
             mtime = os.stat(image_file).st_mtime
             strip['mtime'] = mtime
     return strips
-    
+
 def sites_iter(in_file):
     """Load the list of other web sites."""
     input = codecs.open(in_file, 'r', 'utf-8')
@@ -105,8 +105,8 @@ def sites_iter(in_file):
                 d = dict(zip(['href', 'title', 'icon_src'], xs))
                 d['number'] = count
                 yield d
-    print 'Read', count, 'entries from', in_file
-    
+    print('Read', count, 'entries from', in_file)
+
 cached_sites = None
 def get_sites(in_file):
     global cached_sites
@@ -117,19 +117,19 @@ def get_sites(in_file):
 
 def make_index(template_name='index.html', template_paths=['templates'], out_dir='out', out_name='index.html', is_verbose=True):
     loader = TemplateLoader(template_paths)
-    print 'Default_encoding:', loader.default_encoding
+    print('Default_encoding:', loader.default_encoding)
     template = loader.load(template_name)
-    
+
     content_markdown = codecs.open('index-content.markdown', 'r', 'utf-8').read()
     content_html = markdown.markdown(content_markdown)
     tws = get_tws()
     sites = get_sites()
     stream = template.generate(tws=tws, sites=sites, content=Markup(content_html))
-    
+
     output = open(os.path.join(out_dir, out_name), 'w')
     stream.render(method='html', out=output, encoding='utf-8')
-    if is_verbose: print 'Wrote HTML to', out_name 
-    
+    if is_verbose: print('Wrote HTML to', out_name)
+
 
 
 help_message = '''
@@ -148,9 +148,9 @@ def main(argv=None):
   try:
     try:
       opts, args = getopt.getopt(argv[1:], "ho:v", ["help", "output="])
-    except getopt.error, msg:
+    except getopt.error as msg:
       raise Usage(msg)
-  
+
     # option processing
     for option, value in opts:
       if option == "-v":
@@ -159,12 +159,12 @@ def main(argv=None):
         raise Usage(help_message)
       if option in ("-o", "--output"):
         output = value
-        
+
     make_index()
-  
-  except Usage, err:
-    print >> sys.stderr, sys.argv[0].split("/")[-1] + ": " + str(err.msg)
-    print >> sys.stderr, "\t for help use --help"
+
+  except Usage as err:
+    print(sys.argv[0].split("/")[-1] + ": " + str(err.msg), file=sys.stderr)
+    print("\t for help use --help", file=sys.stderr)
     return 2
 
 

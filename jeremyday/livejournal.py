@@ -83,7 +83,7 @@ def entries_from_livejournal_html_iter(html):
                 'title': img_soup['alt'],
             }
         img_soup.parent.extract()
-        entry['content'] = unicode(body)
+        entry['content'] = str(body)
 
         for comment_soup in entry_soup.find('li', 'asset-meta-comments item asset-meta-no-comments'):
             s = comment_soup.string
