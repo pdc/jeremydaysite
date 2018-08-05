@@ -4,3 +4,4 @@ dev.db
 settings.py
 build
 .env
+tmp.*

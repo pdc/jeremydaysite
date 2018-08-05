@@ -1,28 +1,29 @@
 
 from httplib2 import Http
-from BeautifulSoup import BeautifulSoup, Tag
+from bs4 import BeautifulSoup, Tag
 from django.core.cache import cache
 from django.conf import settings
 from datetime import datetime
 import re
 
-_http = None
+
 def get_http():
-    global _http
-    if _http is None:
-        _http = Http(settings.HTTPLIB2_CACHE_DIR)
-    return _http
+    return Http(settings.HTTPLIB2_CACHE_DIR)
+
 
 def entries_from_livejournal_url(url):
-    """Given the URL of a front page of a LiveJournal journal, return a list of entries."""
+    """Get entries of the LiveJournal journal with this front-page URL."""
     html_key = 'livejournal-%s' % url
     html = cache.get(html_key)
     if html is None:
-        response, html = get_http().request(url, headers={'user-agent': 'jeremyday.uk/1.0 (like Godzilla; pdc@alleged.org.uk)'})
+        response, html = get_http().request(url, headers={
+            'user-agent': 'jeremyday.uk/1.0 (like Godzilla; pdc@alleged.org.uk)',
+        })
         cache.set(html_key, html)
 
     entries = entries_from_livejournal_html(html)
     return entries
+
 
 def entries_from_livejournal_html(html):
     """Given HTML from a LiveJournal page, return a list of entries."""
@@ -42,16 +43,17 @@ date_re = re.compile(r"""
     """, re.VERBOSE)
 mumfs = ['Zro', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
+
 def entries_from_livejournal_html_iter(html):
     """Given HTML from a LiveJournal page, generate a list of entries."""
-    entry_sep_re = re.compile(r'<div id="asset-cleanskies-[0-9]+" class="post-asset asset">')
-    html = html.replace('"height="', '" height="')
-    #frags = entry_sep_re.split(html)
-    soup = BeautifulSoup(html)
+    # html = html.replace(b'"height="', b'" height="')
+    # entry_sep_re = re.compile(r'<div id="asset-cleanskies-[0-9]+" class="post-asset asset">')
+    # frags = entry_sep_re.split(html)
+    soup = BeautifulSoup(html, 'html5lib')
 
-    for entry_soup in soup.findAll('div', 'post-asset asset'):
+    for entry_soup in soup.select('.post-asset.asset'):
         heading_soup = entry_soup.find('h2')
-        if heading_soup.find('span', 'lj-entry-securityicon'):
+        if heading_soup.select_one('.lj-entry-securityicon'):
             continue
         link = heading_soup.a
         if link.string == 'moments between posts':
@@ -61,7 +63,7 @@ def entries_from_livejournal_html_iter(html):
             'href': link['href'],
         }
 
-        date_str = entry_soup.find('abbr','datetime').string
+        date_str = entry_soup.select_one('abbr.datetime').string
         # strptime is helpless in the presence of ordinal suffixes.
         m = date_re.match(date_str)
         entry['published'] = datetime(
@@ -73,8 +75,8 @@ def entries_from_livejournal_html_iter(html):
             0
         )
 
-        body = entry_soup.find('div', 'asset-body')
-        img_soup = entry_soup.find('div', 'user-icon').img
+        body = entry_soup.select_one('.asset-body')
+        img_soup = entry_soup.select_one('.user-icon img')
         if img_soup:
             entry['userpic'] = {
                 'src': img_soup['src'],
@@ -83,9 +85,9 @@ def entries_from_livejournal_html_iter(html):
                 'title': img_soup['alt'],
             }
         img_soup.parent.extract()
-        entry['content'] = unicode(body)
+        entry['content'] = str(body)
 
-        for comment_soup in entry_soup.find('li', 'asset-meta-comments item asset-meta-no-comments'):
+        for comment_soup in entry_soup.select_one('.asset-meta-no-comments'):
             s = comment_soup.string
             if s.endswith(' worms'):
                 entry['comment_count'] = int(s[:-5], 10)

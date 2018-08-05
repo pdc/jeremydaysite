@@ -1,9 +1,10 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}{{ year }} - The Weekly Strip - Jeremy Day{% endblock %}
 {% block trail %}
 <div id="home-link">
-  <a href="/"><img src="{{ STATIC_URL }}style/theweeklystrip-smaller.png" alt="The Weekly Strip by Jeremy Day" /></a>
+  <a href="/"><img src="{% static 'style/theweeklystrip-smaller.png' %}" alt="The Weekly Strip by Jeremy Day" /></a>
 </div>
 {% endblock %}
 {% block heading %}

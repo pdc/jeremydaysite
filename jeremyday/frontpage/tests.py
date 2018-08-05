@@ -12,13 +12,6 @@ from jeremyday.livejournal import *
 from jeremyday.context_processors import *
 
 class SimpleTest(TestCase):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        self.failUnlessEqual(1 + 1, 2)
-
-
     def test_entries(self):
         with open('jeremyday/frontpage/lj-test.html', 'rb') as input:
             html = input.read()
@@ -26,13 +19,13 @@ class SimpleTest(TestCase):
         entries = entries_from_livejournal_html(html)
         self.assertEqual(14, len(entries)) # 20 entries of which one is friends-locked.
         for i, entry in enumerate(entries):
-            self.assert_(entry['title'], 'expected title for entry #%d' % i)
-            self.assert_(entry['href'], 'expected href for entry #%d' % i)
-            self.assert_(entry['content'], 'expected content for entry #%d' % i)
-            self.assert_(entry['userpic']['src'], 'expected userpic.src for entry #%d' % i)
+            self.assertTrue(entry['title'], 'expected title for entry #%d' % i)
+            self.assertTrue(entry['href'], 'expected href for entry #%d' % i)
+            self.assertTrue(entry['content'], 'expected content for entry #%d' % i)
+            self.assertTrue(entry['userpic']['src'], 'expected userpic.src for entry #%d' % i)
             self.assertEqual(100, entry['userpic']['width'], 'expected userpic.src for entry #%d' % i)
-            self.assert_(entry['content'])
-            self.assert_('class="user-icon"' not in entry['content'])
+            self.assertTrue(entry['content'])
+            self.assertTrue('class="user-icon"' not in entry['content'])
 
         self.assertEqual(datetime(2010, 3, 17, 23, 21, 0), entries[0]['published'])
         self.assertEqual(datetime(2010, 3, 16, 21, 41, 0), entries[1]['published'])

@@ -5,15 +5,16 @@ import codecs
 import httplib2
 import json
 from xml.etree import ElementTree as ET
-from django.utils import safestring
-from django.core.urlresolvers import reverse
-from django.core.cache import cache
-from django.http import HttpResponse, Http404
-from django.template import RequestContext, loader, Context
-from django.shortcuts import render_to_response
-from django.views.decorators.cache import cache_page
 from django.conf import settings
+from django.core.cache import cache
+from django.http import HttpResponse, JsonResponse, Http404
+from django.shortcuts import render_to_response
+from django.template import RequestContext, loader, Context
+from django.urls import reverse
+from django.utils import safestring
+from django.views.decorators.cache import cache_page
 from markdown import Markdown
+
 from jeremyday import twslib
 from jeremyday.livejournal import entries_from_livejournal_url
 
@@ -34,10 +35,12 @@ def render_with_template(default_template_name, default_base_template_name='base
         return wrapped_handler
     return decorator
 
+
 @render_with_template('jeremyday/front.html')
 def front_page(request):
     text_file = os.path.join(settings.FRONTPAGE_DIR,'introduction.md')
-    text = codecs.open(text_file, 'r', 'UTF-8').read()
+    with open(text_file, 'r', encoding='UTF-8') as input:
+        text = input.read()
     tws = twslib.get_tws(settings.TWS_FILE, settings.TWS_SRC_PREFIX)
 
     other_sites = twslib.get_sites(os.path.join(settings.FRONTPAGE_DIR, 'other-sites.data'))
@@ -48,8 +51,11 @@ def front_page(request):
         'other_sites': other_sites,
     }
 
+
 LIVEJOURNAL_ATOM_CACHE_KEY = 'livejournal-atom-%s-1' % settings.LIVEJOURNAL_ATOM_URL
 LIVEJOURNAL_HTML_CACHE_KEY = 'livejournal-rendered-%s-' % settings.LIVEJOURNAL_URL
+
+
 def livejournal(request):
     html = cache.get(LIVEJOURNAL_HTML_CACHE_KEY)
 
@@ -78,13 +84,12 @@ def livejournal(request):
 
         if feed:
             template = loader.get_template('jeremyday/livejournal.div.html')
-            context = Context({'feed': feed})
-            html = template.render(context)
+            html = template.render({'feed': feed}, request)
             cache.set(LIVEJOURNAL_HTML_CACHE_KEY, html)
 
     result = {
         'success': True,
         'body': html,
     }
-    response = HttpResponse(json.dumps(result, 'UTF-8'), content_type='text/javascript')
+    response = JsonResponse(result, json_dumps_params={'indent': 4})
     return response
