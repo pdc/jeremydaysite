@@ -156,33 +156,58 @@ p {
     color: #FFF;
 }
 
-#content {
-    margin: 0 auto;
-    width: 960px;
-    padding: 1px 0;
+.content {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
 }
+
+.content-clear {
+    display: none;
+}
+
 
 /*
 * Front page basic layout
 */
 
-
-.col {
-    float: left;
-}
-
-#tws { /* 3u */
+.tws-col {
     width: 240px;
-    margin-left: -800px;
+    order: 1;
 }
 
-#main { /* 7u */
+.main-col {
     width: 560px;
-    margin-left: 240px;
+    order: 2;
 }
 
-#appearances {
+.appearances-col {
     width: 160px;
+    order: 3;
+}
+
+@media (min-width: 1060px) {
+    .main-col {
+        width: 640px;
+    }
+}
+
+@media (min-width: 1140px) {
+    .appearances-col {
+        width: 240px;
+    }
+}
+
+@media (min-width: 1220px) {
+    .appearances-col {
+        margin-left: 80px;
+    }
+}
+
+@media (min-width: 1300px) {
+    .content {
+        justify-content: space-evenly;
+    }
 }
 
 /* Weekly Strip */
@@ -417,6 +442,10 @@ h4 {
 
 
 /* Twitter */
+
+.appearances-tweets {
+    background-color: #FFF;
+}
 
 ul.links {
     padding: 0.25em 0;

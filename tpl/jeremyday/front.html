@@ -18,7 +18,7 @@
 
 {% block content %}
 
-<div id="main" class="col">
+<div id="main" class="col main-col">
   <div class="picture captioned left">
     <a href="http://www.flickr.com/photos/glasseye/2318407904/">
       <img src="{% static 'style/by-matt-220w.jpg' %}" alt="" width="220" height="330" align="right" />
@@ -46,7 +46,7 @@
   <div id="livejournal"><a href="http://cleanskies.livejournal.com/">Click to see my LiveJournal</a></div>
 </div>
 
-<div id="tws" class="col">
+<div id="tws" class="col tws-col">
   <h2>The Weekly Strip</h2>
   <ul>
     {% for strip in tws %}
@@ -60,7 +60,7 @@
   </ul>
 </div>
 
-<div id="appearances" class="col">
+<div id="appearances" class="col appearances-col">
   <h2>Cleanskies on …</h2>
   <ul class="links">
     {% for site in other_sites %}
@@ -73,8 +73,10 @@
     {% endfor %}
   </ul>
 
-  <h2>tweet tweet</h2>
-  <ul id="cleanskies">
-  </ul>
+  <h2 id="cleanskies">tweet tweet</h2>
+  <div class="appearances-tweets">
+    <a class="twitter-timeline" data-width="240" data-dnt="true" href="https://twitter.com/cleanskies?ref_src=twsrc%5Etfw">Tweets by cleanskies</a>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </div>
 </div>
 {% endblock %}

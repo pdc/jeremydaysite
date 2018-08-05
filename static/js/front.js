@@ -9,20 +9,20 @@
 function twitterTo(data, list) {
     for (var i = 0; i < data.results.length; ++i) {
         var tweet = data.results[i];
-        var link = $('<a>').attr('href', 'http://twitter.com/cleanskies/statuses/' + tweet.id);
-    
+        var link = $('<a>').attr('href', 'https://twitter.com/cleanskies/statuses/' + tweet.id);
+
         // Can we use the image without making a mess?
-        var src = 'http://urlimg.com/square/16/' + tweet.profile_image_url.slice(7);
+        var src = 'https://urlimg.com/square/16/' + tweet.profile_image_url.slice(7);
         $('<img>').attr({src: src, alt: ''}).appendTo(link);
-    
+
         // The text uses HTML escapes for ampersands etc.,
-        // so I could just use jQueryâ€™s html method here,
+        // so I could just use jQuery’s html method here,
         // but do I want to trust Twitter to be immune to XSS attacks?
-        // Instead I reverse the HTML escaping jQueryâ€™s text method will apply.
+        // Instead I reverse the HTML escaping jQuery’s text method will apply.
         text = tweet.text.replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&amp;/g, '&');
         $('<span>').text(text).appendTo(link);
         link.append(' ');
-    
+
         // Convert the date of the tweet to a relative timestamp.
         var created = Date.parse(tweet.created_at);
         var nowish = new Date().getTime();
@@ -42,15 +42,15 @@ function twitterTo(data, list) {
           ago = 'just now';
         }
         $('<small>').attr('class', 'permalink').append($('<b>').text(ago)).appendTo(link);
-    
+
         // Add the link as a list item.
         var item = $('<li>').attr('class', 'big');
         item.append(link);
         list.append(item);
-    }   
+    }
 }
 
-$(document).ready(function () {    
+$(document).ready(function () {
     var livejournal$ = $('#livejournal');
     livejournal$.prev('h2').addClass('loading');
     $.ajax({
@@ -65,16 +65,19 @@ $(document).ready(function () {
             livejournal$.prev('h2').removeClass('loading');
         }
     });
-    
+
+    if (false) {
+
     // We are loading the Twitter feed, so mark the heading accordingly.
     var twitter$ = $('#cleanskies');
     twitter$.prev('h2').addClass('loading');
     $.ajax({
-        url: 'http://search.twitter.com/search.json?q=from%3Acleanskies',
+        url: 'https://api.twitter.com/1.1/search/tweets.json?q=from%3Acleanskies&result_type=recent',
         dataType: 'jsonp',
         success: function (data, textStatus, request) {
             twitterTo(data, twitter$);
             twitter$.prev('h2').removeClass('loading');
         }
     });
+    }
 });
