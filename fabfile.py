@@ -12,7 +12,7 @@ env.django_apps = ['theweeklystrip', 'spreadlinks', 'frontpage']
 
 
 def update_requirements():
-    local("pipenv lock -r' > requirements.txt")
+    local("pipenv lock -r > requirements.txt")
 
 
 def test():

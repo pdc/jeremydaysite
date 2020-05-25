@@ -4,10 +4,10 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = ">=2,<2.1"
+django = "==3.0.*"
 django-environ = "*"
 "beautifulsoup4" = "*"
-"httplib2" = "*"
+httplib2 = ">=0.18"
 rdflib = "*"
 spreadlinks = "*"
 "html5lib" = "*"
@@ -15,4 +15,4 @@ spreadlinks = "*"
 [dev-packages]
 
 [requires]
-python_version = "3.6"
+python_version = "3.8"

@@ -203,7 +203,7 @@ def reading_order_feed(request, page=None):
     subset = strips[beg:end]
     subset.reverse()
     twslib.add_mtimes(subset, settings.TWS_IMAGE_DIR)
-    feed_updated = 0
+    feed_updated = None
     for strip in subset:
         strip['icon_src'] = request.build_absolute_uri(strip['icon_src'])
         strip['image_src'] = request.build_absolute_uri(strip['image_src'])
@@ -216,7 +216,7 @@ def reading_order_feed(request, page=None):
         else:
             strip['id'] = 'tag:jeremyday.org.uk,2010:tws-strip:%d' % strip['number']
 
-        if updated > feed_updated: # This is the first time I have actually exploited the sortability of RFC 3339 datetimes!
+        if not feed_updated or updated > feed_updated: # This is the first time I have actually exploited the sortability of RFC 3339 datetimes!
             feed_updated = updated
 
     tpl_args = {

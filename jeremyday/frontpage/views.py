@@ -8,7 +8,7 @@ from xml.etree import ElementTree as ET
 from django.conf import settings
 from django.core.cache import cache
 from django.http import HttpResponse, JsonResponse, Http404
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.template import RequestContext, loader, Context
 from django.urls import reverse
 from django.utils import safestring
@@ -31,7 +31,7 @@ def render_with_template(default_template_name, default_base_template_name='base
                 return result
             if not result.get('base_template_name'):
                 result['base_template_name'] = base_template_name or default_base_template_name
-            return render_to_response(template_name or default_template_name, result, RequestContext(request))
+            return render(request, template_name or default_template_name, result)
         return wrapped_handler
     return decorator
 

@@ -1,14 +1,17 @@
 -i https://pypi.org/simple
-beautifulsoup4==4.6.1
+asgiref==3.2.7
+beautifulsoup4==4.9.1
 django-environ==0.4.5
-django==2.0.8
+django==3.0.6
 html5lib==1.0.1
-httplib2==0.11.3
+httplib2==0.18.1
 isodate==0.6.0
-markdown==2.6.11
-pyparsing==2.2.0
-pytz==2018.5
-rdflib==4.2.2
-six==1.11.0
-spreadlinks==0.3.0
+markdown==3.2.2
+pyparsing==2.4.7
+pytz==2020.1
+rdflib==5.0.0
+six==1.15.0
+soupsieve==2.0.1
+spreadlinks==0.4.0
+sqlparse==0.3.1
 webencodings==0.5.1

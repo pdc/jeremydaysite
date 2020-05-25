@@ -1,9 +1,7 @@
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.shortcuts import render_to_response
-from django.template import RequestContext
 from django.urls import reverse
-from rdflib import BNode, Literal, Namespace, RDF, URIRef
+from rdflib import Literal, Namespace, RDF, URIRef
 from rdflib import ConjunctiveGraph
 
 from jeremyday import twslib
