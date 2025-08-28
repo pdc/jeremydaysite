@@ -28,7 +28,6 @@ def strip_conneg(request, number):
         )
         q = float(params.get("q", "1"))
         if best_q is None or q > best_q:
-            is_found = False
             for media in options.keys():
                 if (
                     media_range == "*/*"

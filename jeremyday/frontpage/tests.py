@@ -5,13 +5,12 @@ unittest). These will both pass when you run "manage.py test".
 Replace these with more appropriate tests for your application.
 """
 
-import os
 from datetime import datetime
 
 from django.test import TestCase
 
-from jeremyday.context_processors import *
-from jeremyday.livejournal import *
+from jeremyday.context_processors import css_naked_date, is_date_covered
+from jeremyday.livejournal import entries_from_livejournal_html
 
 
 class SimpleTest(TestCase):

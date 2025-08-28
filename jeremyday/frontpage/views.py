@@ -1,19 +1,15 @@
 # Create your views here.
 
-import codecs
-import json
 import os
 from xml.etree import ElementTree as ET
 
 import httplib2
 from django.conf import settings
 from django.core.cache import cache
-from django.http import Http404, HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
-from django.template import Context, RequestContext, loader
-from django.urls import reverse
+from django.template import loader
 from django.utils import safestring
-from django.views.decorators.cache import cache_page
 from markdown import Markdown
 
 from jeremyday import twslib

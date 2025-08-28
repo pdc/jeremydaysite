@@ -7,7 +7,6 @@ Created by Damian Cugley on 2008-11-09.
 Copyright © 2008 Damian Cugley. All rights reserved.
 """
 
-import codecs
 import datetime
 import getopt
 import os

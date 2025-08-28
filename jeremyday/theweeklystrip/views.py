@@ -1,16 +1,13 @@
 # Encoding: UTF-8
 
 import time
-from datetime import date, datetime
+from datetime import date
 from urllib.parse import urlencode
 
 from django.conf import settings
-from django.core.cache import cache
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from django.template import RequestContext
 from django.urls import reverse
-from django.views.decorators.cache import cache_page
 
 from jeremyday import twslib
 

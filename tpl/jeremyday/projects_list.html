@@ -14,7 +14,7 @@
 <div id="keywords">
   {% for facet_name, facet in facet_drillupdowns %}
   <div class="facet">
-    <h2>{% ifequal facet_name "main" %}Keywords{% else %}{{ facet_name }}{% endifequal %}</h2>
+    <h2>{% if facet_name == "main" %}Keywords{% else %}{{ facet_name }}{% endif %}</h2>
     {% if facet.drilldowns or facet.drillups %}
       {% if facet.drillups %}
       <ul id="drillup">

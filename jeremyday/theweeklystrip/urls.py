@@ -1,54 +1,53 @@
 # -*- coding: utf-8 -*-
 
 
-from django.conf import settings
-from django.conf.urls import url
+from django.urls import path, re_path
 
 import jeremyday.theweeklystrip.rdf_views
 import jeremyday.theweeklystrip.views
 
 urlpatterns = [
-    url(r"^$", jeremyday.theweeklystrip.views.latest, {}, "tws_latest"),
-    url(
-        r"^strips/(?P<number>[0-9]+)$",
+    path(r"", jeremyday.theweeklystrip.views.latest, name="tws_latest"),
+    path(
+        r"strips/<int:number>",
         jeremyday.theweeklystrip.views.strip_page,
-        {},
-        "tws_strip",
+        name="tws_strip",
     ),
-    url(
-        r"^year/(?P<year>20[0-9]{2})$",
+    path(
+        r"year/<int:year>",
         jeremyday.theweeklystrip.views.year_page,
-        {},
-        "tws_year",
+        name="tws_year",
     ),
-    url(
+    re_path(
         r"^bydate/(?P<year>20[0-9]{2})(?P<month>[01][0-9])(?P<day>[0-3][0-9])$",
         jeremyday.theweeklystrip.views.by_date,
-        {},
-        "tws_date",
+        name="tws_date",
     ),
-    url(
-        r"^feeds/in-reading-order\.atom$",
+    path(
+        r"feeds/in-reading-order.atom",
         jeremyday.theweeklystrip.views.reading_order_feed,
-        {},
-        "tws_reading_order_feed",
+        name="tws_reading_order_feed",
     ),
-    url(
-        r"^feeds/in-reading-order\.page(?P<page>[0-9]+)\.atom$",
+    path(
+        r"feeds/in-reading-order.page<int:page>.atom",
         jeremyday.theweeklystrip.views.reading_order_feed,
-        {},
-        "tws_reading_order_feed",
+        name="tws_reading_order_feed",
     ),
-    url(
-        r"^r/strip(?P<number>[0-9]+)$",
+    path(
+        r"r/strip<int:number>",
         jeremyday.theweeklystrip.rdf_views.strip_conneg,
-        {},
-        "tws_strip_resource",
+        name="tws_strip_resource",
     ),
-    url(
-        r"^data/strip(?P<number>[0-9]+).(?P<format>n3|xml)$",
+    path(
+        r"data/strip<int:number>.n3",
         jeremyday.theweeklystrip.rdf_views.strip_rdf,
-        {},
-        "tws_strip_rdf",
+        {"format": "n3"},
+        name="tws_strip_rdf",
+    ),
+    path(
+        r"data/strip<int:number>.xml",
+        jeremyday.theweeklystrip.rdf_views.strip_rdf,
+        {"format": "xml"},
+        name="tws_strip_rdf",
     ),
 ]

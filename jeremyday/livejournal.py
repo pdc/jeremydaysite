@@ -1,7 +1,7 @@
 import re
 from datetime import datetime
 
-from bs4 import BeautifulSoup, Tag
+from bs4 import BeautifulSoup
 from django.conf import settings
 from django.core.cache import cache
 from httplib2 import Http

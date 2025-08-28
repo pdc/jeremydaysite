@@ -1,7 +1,6 @@
 *.pyc
-dev.db
 *.lineform/
-settings.py
 build
 .env
 tmp.*
+db.sqlite3
