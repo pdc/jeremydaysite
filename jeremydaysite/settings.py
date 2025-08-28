@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env(
     DEBUG=(bool, False),
     STATIC_ROOT=(str, None),
-    STATIC_URL=(str, "static/"),
+    STATIC_URL=(str, "/static/"),
     SECRET_KEY=str,
     ALLOWED_HOSTS=(list, []),
     HTTPLIB2_CACHE_DIR=(str, "/var/tmp/jeremydaysite-httplib2-cache"),
@@ -128,7 +128,13 @@ USE_TZ = True
 
 STATIC_URL = env("STATIC_URL")
 STATIC_ROOT = env("STATIC_ROOT")
-STATICFILES_DIRS = (BASE_DIR / "static",)
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+# Cache for Django
+
+CACHES = {"default": env.cache(default="locmemcache:")}
 
 
 FRONTPAGE_DIR = BASE_DIR / "content"
