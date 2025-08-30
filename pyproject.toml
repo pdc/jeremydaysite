@@ -15,7 +15,7 @@ dependencies = [
     "beautifulsoup4 (>=4.13.5,<5.0.0)",
     "httplib2 (>=0.22.0,<0.23.0)",
     "html5lib (>=1.1,<2.0)",
-    "spreadlinks @ file:///Users/pdc/Projects/spreadlinks/dist/spreadlinks-0.4.2-py3-none-any.whl"
+    "spreadlinks (>=0.5.0,<0.6.0)"
 ]
 
 

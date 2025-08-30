@@ -23,7 +23,7 @@ Create system user `jeremyday` and directory `/home/jeremyday` with subdirs
 Unpack the site in to the sites folder
 
     cd /home/jeremyday/sites
-    git clone https://github.com/pdc/jeremyday.git
+    git clone https://github.com/pdc/jeremydaysite.git jeremyday
 
 Create appropriate static server definitions in Nginx and link to static directories
 from where static files are served:
@@ -35,12 +35,16 @@ These are the static sites <https://lastcentury.jeremyday.org.uk> and <https://n
 
 Create directories for caching downloads & Django objects:
 
+    ENV=/home/jeremyday/etc/production.env
     HTTPLIB2_CACHE_DIR=/var/cache/jeremyday/requests
     CACHE_DIR=/var/cache/jeremyday/django
-    mkdir $HTTPLIB2_CACHE_DIR $CACHE_DIR
-    chown jeremyday.jeremyday $HTTPLIB2_CACHE_DIR $CACHE_DIR
+    mkdir  /var/cache/jeremyday $HTTPLIB2_CACHE_DIR $CACHE_DIR
+    chown jeremyday:jeremyday $HTTPLIB2_CACHE_DIR $CACHE_DIR
     echo HTTPLIB2_CACHE_DIR=$HTTPLIB2_CACHE_DIR >> $ENV
     echo CACHE_URL=filecache://$CACHE_DIR >> $ENV
+
+Aside. Should these directories be created via Systemd units? In principle it is
+permitted to randomly delete them I think?
 
 What next? Oh yes, the virtual environment.
 
@@ -52,6 +56,7 @@ What next? Oh yes, the virtual environment.
 
 Remember to use the environment file while testing & running management commands.
 
+    ENV=/home/jeremyday/etc/production.env
     cd /home/jeremyday/sites/jeremyday
     env $(cat $ENV) ./manage.py check
     echo STATIC_DIR=/home/jeremyday/static >> $ENV

@@ -387,22 +387,19 @@ files = [
 
 [[package]]
 name = "spreadlinks"
-version = "0.4.2"
+version = "0.5.0"
 description = "Django app for displaying links to resources with simple tags-based filtering"
 optional = false
-python-versions = ">=3.13,<4"
+python-versions = "<4,>=3.13"
 groups = ["main"]
 files = [
-    {file = "spreadlinks-0.4.2-py3-none-any.whl", hash = "sha256:99ea1d1cf1e3d99fdbe16c206f6bcaee7d6536567d0b852ea9f1d81fb6403dc1"},
+    {file = "spreadlinks-0.5.0-py3-none-any.whl", hash = "sha256:fe2b01c91a2b9278d90db4dec622947e4729660a8ba8d2d9eefac8c2ac1c274c"},
+    {file = "spreadlinks-0.5.0.tar.gz", hash = "sha256:9c00e569ccf391a97bfc9c97cccd6541a659e572d1d718ed07cecb45891be222"},
 ]
 
 [package.dependencies]
 django = ">=5.2.5,<6.0.0"
 markdown = ">=3.8.2,<4.0.0"
-
-[package.source]
-type = "file"
-url = "../spreadlinks/dist/spreadlinks-0.4.2-py3-none-any.whl"
 
 [[package]]
 name = "sqlparse"
@@ -460,4 +457,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13,<4"
-content-hash = "9297db930ba0bf05c15bda53eba79074c401d10a65b7916a991377a332629b87"
+content-hash = "36fbfd6cdccdc480ac8f66de5845efa69b81f41a5ec65cf1e5837ea5b5f8232c"
