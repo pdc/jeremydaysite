@@ -15,6 +15,11 @@ import time
 
 import markdown
 from django.core.cache import cache
+from django.template.loader import get_template
+
+
+class FormatException(Exception):
+    pass
 
 
 def word_iter(s):
@@ -132,17 +137,15 @@ def make_index(
     out_name="index.html",
     is_verbose=True,
 ):
-    loader = TemplateLoader(template_paths)
-    print("Default_encoding:", loader.default_encoding)
-    template = loader.load(template_name)
+    template = get_template(template_name)
 
     with open("index-content.markdown", "r", encoding="UTF-8") as input:
         content_markdown = input.read()
     content_html = markdown.markdown(content_markdown)
     tws = get_tws()
     sites = get_sites()
-    stream = template.generate(tws=tws, sites=sites, content=Markup(content_html))
-
+    context = {"tws": tws, "sites": sites, "content": markdown(content_html)}
+    stream = template.render(context)
     output = open(os.path.join(out_dir, out_name), "w")
     stream.render(method="html", out=output, encoding="utf-8")
     if is_verbose:
