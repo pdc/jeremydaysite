@@ -6,7 +6,8 @@ html {
 	padding: 0pt;
 }
 
-acronym, abbr {
+acronym,
+abbr {
 	font-style: inherit;
 	border-bottom: 1px dotted #999;
 }
@@ -15,7 +16,7 @@ body {
 	font-family: Georgia, serif;
 	line-height: 1.4;
 
-	background-image: url(http://static.jeremyday.org.uk/style/jeremyday-bg.gif);
+	background-image: url(http://static.jeremyday.uk/style/jeremyday-bg.gif);
 	background-color: #CC004C;
 	color: #FFF;
 	margin: 2px;
@@ -42,7 +43,8 @@ div.content {
 	border: 1px dotted black;
 }
 
-h1, h2 {
+h1,
+h2 {
 	font-family: Georgia, serif;
 	font-weight: normal;
 	font-style: italic;
@@ -147,10 +149,10 @@ table.strip {
 	border: 2px dotted black;
 	padding: 0.5em;
 }
-	
+
 #weeklyStrip {
 	font-size: small;
-	font-weight: 400;	
+	font-weight: 400;
 	line-height: 1.2;
 	background-color: #FFF;
 	border: 1px dotted black;
