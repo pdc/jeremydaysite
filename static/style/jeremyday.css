@@ -19,11 +19,11 @@ img {
 }
 
 body {
-    font-size: 81.25%; /* Often this means 13px */
+    font-size: 13px;
 
     font-family: "Verdana", sans-serif;
-    line-height: 1.23; /* Often this will be 16px */
-    background: #EEE url(jeremyday-bg-pale.png);
+    line-height: 1.5;
+    background: #EEE url(jeremyday-bg-pale.png) fixed 0 0;
 }
 
 #home-link {
@@ -36,7 +36,7 @@ body {
     position: relative;
     padding: 1px 0;
     height: 173px;
-    background: #CC004C url(jeremyday-bg.gif);
+    background: #CC004C url(jeremyday-bg.gif) fixed 0 0;
 }
 
 h1 {
@@ -59,6 +59,7 @@ h1 img {
     width: 100%;
     height: 50px;
 }
+
 #tabs ul {
     float: right;
 }
@@ -75,13 +76,16 @@ h1 img {
 #tabs li#tab-home {
     background: url(jeremyday-bg-dark.png) left top fixed;
 }
+
 #tabs li#tab-projects {
     color: #333;
     background: url(wares-180.jpeg) 50% 50% no-repeat;
 }
+
 #tabs li#tab-whores {
     background: url(wares-whores-180.jpeg) 50% 50% no-repeat;
 }
+
 #tabs li#tab-1999 {
     color: #333;
     background: url(link-1999.png) left bottom no-repeat;
@@ -110,6 +114,7 @@ h1 img {
 #tabs li a {
     background: url(tab.png) left bottom no-repeat;
 }
+
 #tabs li#tab-home a {
     background: transparent;
 }
@@ -124,7 +129,8 @@ h1 img {
     position: absolute;
     right: 10px;
     bottom: 0;
-    width: 536px; /* 4 * 134px */
+    width: 536px;
+    /* 4 * 134px */
     height: 50px;
 }
 
@@ -224,6 +230,7 @@ p {
     clear: both;
     width: 100%;
 }
+
 .tws-year li {
     width: 240px;
 }
@@ -249,7 +256,8 @@ p {
     -moz-box-shadow: #000 2px 2px 5px;
     -webkit-box-shadow: #000 2px 2px 5px;
 }
-#tws li a:active ,
+
+#tws li a:active,
 .tws-year li a:active {
     background-color: #FFF;
     -moz-box-shadow: #000 1px 1px 3px;
@@ -316,6 +324,7 @@ p {
     float: left;
     margin: 0 20px 0 10px;
 }
+
 .picture.right {
     float: right;
     margin: 0 10px 0 20px;
@@ -327,9 +336,9 @@ p {
     position: absolute;
     right: 0;
     bottom: 0;
-    -moz-transform: rotate(-90deg) translate(100%, 0) translate(0,1em);
+    -moz-transform: rotate(-90deg) translate(100%, 0) translate(0, 1em);
     -moz-transform-origin: right bottom;
-    -webkit-transform:  translate(100%, 0) translate(1em, 0) rotate(-90deg);
+    -webkit-transform: translate(100%, 0) translate(1em, 0) rotate(-90deg);
     -webkit-transform-origin: left bottom;
 
     color: #999;
@@ -419,6 +428,7 @@ p {
     margin: 0 0 1.23em;
     padding: 0 10px 0 90px;
 }
+
 .entry-footer {
     clear: both;
     margin: 1.23em 0;
@@ -456,6 +466,8 @@ ul.links {
 }
 
 .links li img {
+    width: 16px;
+    height: 16px;
     vertical-align: middle;
 }
 
@@ -527,7 +539,8 @@ ul.links {
 }
 
 h2 {
-    font-size: 1.38em; /* Often this will be 18px */
+    font-size: 1.38em;
+    /* Often this will be 18px */
     clear: both;
     padding: 0.89em 10px 0;
 
@@ -549,6 +562,7 @@ h2.loading {
     width: 800px;
     float: left;
 }
+
 #links ul {
     margin: 0.67em 0;
 }
@@ -570,6 +584,7 @@ h2.loading {
     -moz-box-shadow: #000 1px 1px 5px;
     -webkit-box-shadow: #000 1px 1px 5px;
 }
+
 #links a:active {
     background-color: #FFF;
     -moz-box-shadow: #000 1px 1px 3px;
@@ -585,6 +600,7 @@ h3 {
     font-weight: normal;
     text-transform: lowercase;
 }
+
 #links h3 {
     margin: 0 10px 0 170px;
 }
@@ -654,6 +670,7 @@ h3 img {
 #strip-prev-next {
     margin: 0;
 }
+
 #strip-prev-next .clear {
     clear: both;
     margin: 0 0 1.23em 0;
@@ -669,16 +686,19 @@ h3 img {
 
     text-decoration: none;
 }
+
 #strip-prev-next a img {
     display: block;
     width: 80px;
     height: 80px;
 }
+
 #strip-prev-next a:hover {
     z-index: 1;
     -moz-box-shadow: #000 2px 2px 5px;
     -webkit-box-shadow: #000 2px 2px 5px;
 }
+
 #strip-prev-next a:active {
     -moz-box-shadow: #000 1px 1px 3px;
     -webkit-box-shadow: #000 1px 1px 3px;
@@ -709,6 +729,7 @@ h3 img {
     text-align: right;
     opacity: 1;
 }
+
 #strip-prev-next a.next:hover span {
     background: url(next-hover.png) left 50% no-repeat;
     opacity: 1;
@@ -739,12 +760,14 @@ h3 img {
     color: inherit;
     text-decoration: none;
 }
+
 #strip-jumps a:hover {
     color: #CC004C;
     background-color: #FFF;
     -moz-box-shadow: #000 2px 2px 5px;
     -webkit-box-shadow: #000 2px 2px 5px;
 }
+
 #strip-jumps a:active {
     color: #CC004C;
     background-color: #FFF;
@@ -774,6 +797,7 @@ h3 img {
     color: #FFF;
     text-shadow: #000 1px 1px 2px;
 }
+
 #strip-jumps a:hover b {
     text-decoration: underline;
     color: #CC004C;
