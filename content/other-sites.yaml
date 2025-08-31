@@ -1,0 +1,31 @@
+sites:
+  - href: http://cleanskies.livejournal.com/
+    title: "LiveJournal"
+    icon_src: http://static.jeremyday.uk/other-sites-icons/lj-16.png
+  - href: https://www.threads.com/@mrsjeremyday
+    title:  "Threads"
+    icon_src: /static/other-sites-icons/threads-icon.svg
+  - href: https://www.instagram.com/mrsjeremyday/
+    title:  "Instagram"
+    icon_src: /static/other-sites-icons/instagram-76.png
+  - withdrawn: true
+    href: http://twitter.com/cleanskies
+    title:  "Twitter"
+    icon_src: http://static.jeremyday.uk/other-sites-icons/twitter-16.png
+  - href: http://cleanskies.tumblr.com/
+    title:  "Tumblr"
+    icon_src: http://static.jeremyday.uk/other-sites-icons/tumblr-16.gif
+  - withdrawn: true
+    href: http://pics.livejournal.com/cleanskies/
+    title:  "Cleanskies Picture Palace"
+    icon_src: http://static.jeremyday.uk/other-sites-icons/lj-pics-16.png
+  - href: http://www.flickr.com/photos/jeremy_dennis/
+    title:  "Flickr"
+    icon_src: http://static.jeremyday.uk/other-sites-icons/flickr-16.png
+  - withdrawn: true
+    href: http://cleanskies.blogspot.com/
+    title:  "Cleanskies blog"
+    icon_src: http://static.jeremyday.uk/other-sites-icons/blogger-16.png
+  - href: http://lastcentury.jeremyday.uk
+    title:  "1999"
+    icon_src: http://static.jeremyday.uk/other-sites-icons/geocities-16.png

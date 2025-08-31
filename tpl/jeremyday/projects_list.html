@@ -59,6 +59,7 @@
     {% endfor %}
   </ul>
 
+  {% if pref_href or next_href %}
   <div class="pagination">
       <span class="step-links">
           {% if prev_href %}
@@ -72,6 +73,7 @@
           {% endif %}
       </span>
   </div>
+{% endif %}
 </div>
 {% endblock %}
 

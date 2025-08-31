@@ -1,60 +1,43 @@
 # Create your views here.
 
-import os
+from pathlib import Path
 from xml.etree import ElementTree as ET
 
 import httplib2
 from django.conf import settings
 from django.core.cache import cache
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.http import JsonResponse
 from django.template import loader
+from django.template.response import TemplateResponse
 from django.utils import safestring
 from markdown import Markdown
 
 from jeremyday import twslib
 from jeremyday.livejournal import entries_from_livejournal_url
+from jeremyday.other_sites import get_sites
 
 formatter = Markdown()
 
-
-def render_with_template(default_template_name, default_base_template_name="base.html"):
-    """Decorator to wrap template-based rendering around a view function returning template variables."""
-
-    def decorator(func):
-        def wrapped_handler(
-            request, template_name=None, base_template_name=None, *args, **kwargs
-        ):
-            result = func(request, *args, **kwargs)
-            if isinstance(result, HttpResponse):
-                return result
-            if not result.get("base_template_name"):
-                result["base_template_name"] = (
-                    base_template_name or default_base_template_name
-                )
-            return render(request, template_name or default_template_name, result)
-
-        return wrapped_handler
-
-    return decorator
+frontpage_dir = Path(settings.FRONTPAGE_DIR)
 
 
-@render_with_template("jeremyday/front.html")
 def front_page(request):
-    text_file = os.path.join(settings.FRONTPAGE_DIR, "introduction.md")
+    text_file = frontpage_dir / "introduction.md"
     with open(text_file, "r", encoding="UTF-8") as input:
         text = input.read()
     tws = twslib.get_tws(settings.TWS_FILE, settings.TWS_SRC_PREFIX)
 
-    other_sites = twslib.get_sites(
-        os.path.join(settings.FRONTPAGE_DIR, "other-sites.data")
+    other_sites = get_sites(frontpage_dir / "other-sites.yaml")
+    return TemplateResponse(
+        request,
+        "jeremyday/front.html",
+        {
+            "text": text,
+            "text_formatted": safestring.mark_safe(formatter.convert(text)),
+            "tws": reversed(tws[-12:]),
+            "other_sites": other_sites,
+        },
     )
-    return {
-        "text": text,
-        "text_formatted": safestring.mark_safe(formatter.convert(text)),
-        "tws": reversed(tws[-12:]),
-        "other_sites": other_sites,
-    }
 
 
 LIVEJOURNAL_ATOM_CACHE_KEY = "livejournal-atom-%s-1" % settings.LIVEJOURNAL_ATOM_URL

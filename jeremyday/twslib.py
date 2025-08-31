@@ -17,6 +17,8 @@ import markdown
 from django.core.cache import cache
 from django.template.loader import get_template
 
+from .other_sites import get_sites
+
 
 class FormatException(Exception):
     pass
@@ -101,33 +103,6 @@ def add_mtimes(strips, image_dir):
             mtime = os.stat(image_file).st_mtime
             strip["mtime"] = mtime
     return strips
-
-
-def sites_iter(in_file):
-    """Load the list of other web sites."""
-    with open(in_file, "r", encoding="UTF-8") as input:
-        count = 0
-        for line in input:
-            line = line.strip()
-            if line:
-                count += 1
-                xs = list(word_iter(line))
-                if xs:
-                    d = dict(zip(["href", "title", "icon_src"], xs))
-                    d["number"] = count
-                    yield d
-    print("Read", count, "entries from", in_file)
-
-
-cached_sites = None
-
-
-def get_sites(in_file):
-    global cached_sites
-    if cached_sites is None:
-        cached_sites = list(sites_iter(in_file))
-        # cached_sites.sort(key=lambda d: d['date'])
-    return cached_sites
 
 
 def make_index(

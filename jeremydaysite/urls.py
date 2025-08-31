@@ -15,9 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+import spreadlinks.views
 from django.conf import settings
 from django.urls import include, path
-import spreadlinks.views
+
 import jeremyday.frontpage.views
 import jeremyday.theweeklystrip.urls
 
