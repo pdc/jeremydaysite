@@ -4,10 +4,10 @@ sites:
     icon_src: http://static.jeremyday.uk/other-sites-icons/lj-16.png
   - href: https://www.threads.com/@mrsjeremyday
     title:  "Threads"
-    icon_src: /static/other-sites-icons/threads-icon.svg
+    icon_src: https://static.jeremyday.uk/other-sites-icons/threads-icon.svg
   - href: https://www.instagram.com/mrsjeremyday/
     title:  "Instagram"
-    icon_src: /static/other-sites-icons/instagram-76.png
+    icon_src: https://static.jeremyday.uk/other-sites-icons/instagram-76.png
   - withdrawn: true
     href: http://twitter.com/cleanskies
     title:  "Twitter"
