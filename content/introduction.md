@@ -9,7 +9,7 @@ workshops, and I'm a founding member of the UK's longest-running comics
 convention, [Caption][].
 
 You can contact me at <http://cleanskies.livejournal.com>, or by
-emailing <jrd@jeremydennis.co.uk>.
+emailing <cleanskies@yahoo.co.uk>.
 
   [Caption]: http://caption/org/
   [Girly Comic]: http://www.factorfictionpress.co.uk/girly/
