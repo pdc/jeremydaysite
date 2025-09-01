@@ -3,28 +3,28 @@
 
 {% block links %}
 <link rel="alternate" type="application/atom+xml" href="{% url 'tws_reading_order_feed' %}"
-    title="The weekly Strip by Jeremy Dennis (in reading order)" />
+    title="The weekly Strip by Jeremy Dennis (in reading order)">
 <link rel="alternate" type="application/rdf+xml" href="{% url 'tws_strip_rdf' number=strip.number|stringformat:'d' format='xml' %}"
-    title="{{ strip.title }} metadata (RDF/XML)" />
+    title="{{ strip.title }} metadata (RDF/XML)">
 <link rel="alternate" type="text/n3" href="{% url 'tws_strip_rdf' number=strip.number|stringformat:'d' format='n3' %}"
-    title="{{ strip.title }} metadata (N3)" />
+    title="{{ strip.title }} metadata (N3)">
 
 <link rel="start" href="{% url 'tws_strip' number=first.number|stringformat:"d" %}"
-          title="{{ first.number }}. {{ first.title }} {{ first.date|date:"j N Y" }}" />
+          title="{{ first.number }}. {{ first.title }} {{ first.date|date:"j N Y" }}">
 {% if prev %}
 <link rel="prev" href="{% url 'tws_strip' number=prev.number|stringformat:"d" %}"
-          title="{{ prev.number }}. {{ prev.title }} {{ prev.date|date:"j N Y" }}" />
+          title="{{ prev.number }}. {{ prev.title }} {{ prev.date|date:"j N Y" }}">
 {% endif %}
 {% if next %}
 <link rel="next" href="{% url 'tws_strip' number=next.number|stringformat:"d" %}"
-          title="{{ next.number }}. {{ next.title }} {{ next.date|date:"j N Y" }}" />
+          title="{{ next.number }}. {{ next.title }} {{ next.date|date:"j N Y" }}">
 {% endif %}
 <link rel="contents" href="{% url 'tws_latest' %}"
-          title="The Weekly Strip by Jeremy Day: Latest" />
+          title="The Weekly Strip by Jeremy Day: Latest">
 {% endblock %}
 
 {% block title %}{{ strip.title }} - The Weekly Strip - Jeremy Day{% endblock %}
-{% block heading %}<img src="{% static 'style/theweeklystrip.png' %}" alt="The Weekly Strip by Jeremy Day" />{% endblock %}
+{% block heading %}<img src="{% static 'style/theweeklystrip.png' %}" alt="The Weekly Strip by Jeremy Day">{% endblock %}
 
 {% block trail %}{% endblock %}
 
@@ -44,7 +44,7 @@
     {% endif %}
   </p>
   <div>
-    <img src="{{ strip.image_src }}" alt="" />
+    <img src="{{ strip.image_src }}" alt="">
   </div>
 </div>
 
@@ -56,7 +56,7 @@
       <a href="{% url 'tws_strip' number=prev.number|stringformat:"d" %}"
           title="{{ prev.number }}. {{ prev.title }} {{ prev.date|date:"j N Y" }}"
           class="prev" rel="prev">
-        <img src="{{ prev.icon_src }}" alt="prev" />
+        <img src="{{ prev.icon_src }}" alt="prev">
         <span>PREV</span>
       </a>
       {% endif %}
@@ -64,7 +64,7 @@
       <a href="{% url 'tws_strip' number=next.number|stringformat:"d" %}"
           title="{{ next.number }}. {{ next.title }} {{ next.date|date:"j N Y" }}"
           class="next" rel="next">
-        <img src="{{ next.icon_src }}" alt="next" />
+        <img src="{{ next.icon_src }}" alt="next">
         <span>NEXT</span>
       </a>
       {% endif %}

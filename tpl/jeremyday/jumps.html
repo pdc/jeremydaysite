@@ -5,12 +5,12 @@
       {% if is_link %}
       <a href="{{ href }}"
           title="{{ other_strip.number }}. {{ other_strip.title }} {{ other_strip.date|date:"j N Y" }}">
-        <img src="{{ other_strip.icon_src }}" alt="{{ other_strip.number }}" />
+        <img src="{{ other_strip.icon_src }}" alt="{{ other_strip.number }}">
         <b>{{ label }}</b>
       </a>
       {% else %}
       <span title="{{ other_strip.number }}. {{ other_strip.title }} {{ other_strip.date|date:"j N Y" }}">
-        <img src="{{ other_strip.icon_src }}" alt="{{ other_strip.number }}" />
+        <img src="{{ other_strip.icon_src }}" alt="{{ other_strip.number }}">
         <b>{{ label }}</b>
       </span>
       {% endif %}

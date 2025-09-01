@@ -4,7 +4,7 @@
 {% block title %}{{ year }} - The Weekly Strip - Jeremy Day{% endblock %}
 {% block trail %}
 <div id="home-link">
-  <a href="/"><img src="{% static 'style/theweeklystrip-smaller.png' %}" alt="The Weekly Strip by Jeremy Day" /></a>
+  <a href="/"><img src="{% static 'style/theweeklystrip-smaller.png' %}" alt="The Weekly Strip by Jeremy Day"></a>
 </div>
 {% endblock %}
 {% block heading %}
@@ -26,7 +26,7 @@
     {% for strip in strips %}
     <li>
       <a href="{% url 'tws_strip' number=strip.number|stringformat:"d" %}">
-        <img src="{{ strip.icon_src }}" width="80" height="80" alt="" />
+        <img src="{{ strip.icon_src }}" width="80" height="80" alt="">
         <b>{{ strip.number }} {{ strip.title|safe }}</b>
         <small>{{ strip.date|date:"j N" }}</small>
       </a>

@@ -2,15 +2,15 @@
 {% load static %}
 <html lang="en-GB">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>{% block title %}Title of page{% endblock %}</title>
     {% if is_css_naked %}
     <!-- No stylesheets on CSS Naked Day -->
     {% else %}
-    <link rel="stylesheet" type="text/css" href="{% static 'style/jeremyday.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'style/jeremyday.css' %}">
     {% endif %}
     {% block links %}{% endblock %}
-    <meta name="author" content="Jeremy Day" />
+    <meta name="author" content="Jeremy Day">
     {% block meta %}{% endblock %}
   </head>
   <body>
@@ -43,8 +43,8 @@
 
     {% block poweredby %}{% endblock %}
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-    <script type="text/javascript" src="{% static 'js/tab-overlay.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+    <script src="{% static 'js/tab-overlay.js' %}"></script>
     {% block javascript %}{% endblock %}
   </body>
 </html>

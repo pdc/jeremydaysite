@@ -2,10 +2,10 @@
 {% load static %}
 
 {% block title %}Jeremy Day{% endblock %}
-{% block heading %}<img src="{% static 'style/wordmark.png' %}" alt="Jeremy Day (incorporating Jeremy Dennis)" />{% endblock %}
+{% block heading %}<img src="{% static 'style/wordmark.png' %}" alt="Jeremy Day (incorporating Jeremy Dennis)">{% endblock %}
 
 {% block meta %}
-    <meta name="google-site-verification" content="Vk6B9nZ6VAHxcY0QZpm7araP8DpjTY3cxIVk06alleQ" />
+    <meta name="google-site-verification" content="Vk6B9nZ6VAHxcY0QZpm7araP8DpjTY3cxIVk06alleQ">
 {% endblock %}
 
 {% block trail %}{% endblock %}
@@ -13,7 +13,7 @@
 {% block tab-home %}<li id="tab-home" class="active"><b>Home</b></li>{% endblock %}
 
 {% block javascript %}
-<script type="text/javascript" src="{% static 'js/front.js' %}"></script>
+<script src="{% static 'js/front.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -21,7 +21,7 @@
 <div id="main" class="col main-col">
   <div class="picture captioned left">
     <a href="http://www.flickr.com/photos/glasseye/2318407904/">
-      <img src="{% static 'style/by-matt-220w.jpg' %}" alt="" width="220" height="330" align="right" />
+      <img src="{% static 'style/by-matt-220w.jpg' %}" alt="" width="220" height="330">
       <small>Photo by Matt Brooker</small>
     </a>
   </div>
@@ -51,7 +51,7 @@
     {% for strip in tws %}
     <li>
       <a href="{% url 'tws_strip' number=strip.number|stringformat:"d" %}">
-        <img src="{{ strip.icon_src }}" alt="" width="80" height="80" />
+        <img src="{{ strip.icon_src }}" alt="" width="80" height="80">
         <b>{{ strip.number }}. {{ strip.title }}</b>
         <small>{{ strip.date|date:"d F Y" }}</small>
       </a>
@@ -65,7 +65,7 @@
     {% for site in other_sites %}
     <li>
       <a href="{{ site.href }}">
-        <img src="{{ site.icon_src }}" alt="" />
+        <img src="{{ site.icon_src }}" alt="">
         <b>{{ site.title }}</b>
       </a>
     </li>
