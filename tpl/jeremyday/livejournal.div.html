@@ -1,5 +1,13 @@
 <div id="livejournal">
+  {% now "Y" as current_year %}
   {% for entry in feed %}
+    {% ifchanged %}
+      {% with year=entry.published|date:"Y" %}
+        {% if year != current_year %}
+  <h2>{{ year }}</h2>
+        {% endif %}
+      {% endwith %}
+    {% endifchanged %}
   <div class="entry">
     <h3><a href="{{ entry.href }}">{{ entry.title }}</a></h3>
     <div class="entry-info">

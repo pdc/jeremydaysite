@@ -28,7 +28,7 @@
       <a href="{% url 'tws_strip' number=strip.number|stringformat:"d" %}">
         <img src="{{ strip.icon_src }}" width="80" height="80" alt="">
         <b>{{ strip.number }} {{ strip.title|safe }}</b>
-        <small>{{ strip.date|date:"j N" }}</small>
+        <time datetime="{{ strip.date|date:"c" }}">{{ strip.date|date:"j N" }}</time>
       </a>
     </li>
     {% endfor %}

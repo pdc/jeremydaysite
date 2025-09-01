@@ -148,12 +148,12 @@ def main(argv=None):
 
         # option processing
         for option, value in opts:
-            if option == "-v":
-                verbose = True
+            # if option == "-v":
+            #     verbose = True
             if option in ("-h", "--help"):
                 raise Usage(help_message)
-            if option in ("-o", "--output"):
-                output = value
+            # if option in ("-o", "--output"):
+            #     output = value
 
         make_index()
 

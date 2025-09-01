@@ -278,15 +278,15 @@ p {
 }
 
 #tws li b,
-#tws li small,
+#tws li time,
 .tws-year li b,
-.tws-year li small {
+.tws-year li time {
     display: block;
 }
 
-#tws li small,
-.tws-year li small {
-    font-size: 0.82em;
+#tws li time,
+.tws-year li time {
+    font-size: 11px;
 }
 
 /* Main */
